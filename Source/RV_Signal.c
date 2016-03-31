@@ -33,6 +33,10 @@ void Th_Sig (void const *arg);          /* Signaling thread prototype         */
 osThreadDef (Th_Sig, osPriorityNormal, 1, 200);
 osThreadId ThId_Sig;
 
+// [ILG]
+void Th_Wakeup (void const *arg);          /* Signaling thread prototype         */
+osThreadDef (Th_Wakeup, osPriorityBelowNormal, 1, 0);
+// ----
 
 /* Definitions for TC_SignalChildToChild */
 void Th_Sig_Child_0 (void const *arg);
@@ -87,6 +91,15 @@ void Th_Sig (void const *arg) {
   }
 }
 
+// [ILG]
+// Thread used to test if the signal set can wake-up the thread before timeout
+void Th_Wakeup (void const *arg)
+{
+  osDelay(10);
+  /* Send signal back to the main thread */
+  ASSERT_TRUE (osSignalSet (Var_ThreadId, 1) != 0x80000000);
+}
+// -----
 
 /*-----------------------------------------------------------------------------
  *      Default IRQ Handler
@@ -97,6 +110,11 @@ void Signal_IRQHandler (void) {
     case 1: Sign_Isr = osSignalClear (Var_ThreadId, 0x00000001); break;
     case 2: Evnt_Isr = osSignalWait  (0x00000001,   0);          break;
     case 3: Evnt_Isr = osSignalWait  (0x00000001, 100);          break;
+
+    // [ILG]
+    // Test the infinite timeout calls too.
+    case 4: Evnt_Isr = osSignalWait  (0x00000001, osWaitForever);          break;
+
   }
 }
 
@@ -289,6 +307,50 @@ void TC_SignalChildToParent (void) {
   ASSERT_TRUE (Var_ThreadId != NULL);
   
   if (Var_ThreadId != NULL) {
+
+      // [ILG]
+      // This code checks if a call to signalWait() with timeout
+      // returns before the timeout expires if the signal is raised.
+
+      // Time known durations, to be used as thresholds.
+      uint32_t bg = osKernelSysTick();
+      osDelay(9);
+      uint32_t t_min = osKernelSysTick() - bg;
+
+      bg = osKernelSysTick();
+      osDelay(14);
+      uint32_t t_max = osKernelSysTick() - bg;
+
+      // The thread will set a signal after 10 ticks.
+      ThId_Sig = osThreadCreate(osThread(Th_Wakeup), NULL);
+      ASSERT_TRUE (ThId_Sig != NULL);
+
+      if (ThId_Sig != NULL) {
+          bg = osKernelSysTick();
+          evt = osSignalWait (1, 100);
+          uint32_t t_10 = osKernelSysTick() - bg;
+          ASSERT_TRUE (evt.status == osEventSignal);
+          // The actual wait should be between 8 and 12.
+          ASSERT_TRUE (t_min < t_10);
+          ASSERT_TRUE (t_10 < t_max);
+      }
+      ASSERT_TRUE (osThreadTerminate(ThId_Sig) == osOK);
+
+      ThId_Sig = osThreadCreate(osThread(Th_Wakeup), NULL);
+      ASSERT_TRUE (ThId_Sig != NULL);
+
+      if (ThId_Sig != NULL) {
+          bg = osKernelSysTick();
+          evt = osSignalWait (1, osWaitForever);
+          uint32_t t_10 = osKernelSysTick() - bg;
+          ASSERT_TRUE (evt.status == osEventSignal);
+          // The actual wait should be between 8 and 12.
+          ASSERT_TRUE (t_min < t_10);
+          ASSERT_TRUE (t_10 < t_max);
+      }
+      ASSERT_TRUE (osThreadTerminate(ThId_Sig) == osOK);
+      // ---
+
     /* Create signaling thread */
     ThId_Sig = osThreadCreate (osThread (Th_Sig), &arg);
     ASSERT_TRUE (ThId_Sig != NULL);
@@ -348,6 +410,11 @@ void TC_SignalChildToChild (void) {
     if (evt.status == osEventSignal) {
       ASSERT_TRUE ((evt.value.signals & 0x03) == 0x03);
     }
+
+    // [ILG]
+    osThreadTerminate(id[0]);
+    osThreadTerminate(id[1]);
+    // -----
   }
 }
 
@@ -451,26 +518,66 @@ void TC_SignalInterrupts (void) {
 
     /* Test signaling between ISR and main thread */
     NVIC_EnableIRQ((IRQn_Type)0);
-  
+
+    // [ILG]
+    event.status = osOK;
+    event.value.signals = (0 - 1);
+    Sign_Isr = (0 - 1);
+    // -----
+
     ISR_ExNum = 0; /* Test: osSignalSet */
     NVIC_SetPendingIRQ((IRQn_Type)0);
+
     event = osSignalWait (0x00000001, 100);
     ASSERT_TRUE (event.status == osEventSignal);
     ASSERT_TRUE (event.value.signals == 0x00000001);
     ASSERT_TRUE (Sign_Isr == 0x00000000);
-    
+
+    // [ILG]
+    Sign_Isr = (0 - 1);
+
     ISR_ExNum = 1; /* Test: osSignalClear */
     ASSERT_TRUE (osSignalSet (Var_ThreadId, 0x00000001) == 0);
+
     NVIC_SetPendingIRQ((IRQn_Type)0);
+
+    // [ILG]
+    osDelay (2);
+
     ASSERT_TRUE (Sign_Isr == 0x80000000);
     
+    // [ILG]
+    Evnt_Isr.status = osOK;
+
     ISR_ExNum = 2; /* Test: osSignalWait (no timeout) */
+
     NVIC_SetPendingIRQ((IRQn_Type)0);
+
+    // [ILG]
+    osDelay (2);
+
     ASSERT_TRUE (Evnt_Isr.status == osErrorISR);
 
+    // [ILG]
+    Evnt_Isr.status = osOK;
+
     ISR_ExNum = 3; /* Test: osSignalWait (with timeout) */
+
     NVIC_SetPendingIRQ((IRQn_Type)0);
+
+    // [ILG]
+    osDelay (2);
+
     ASSERT_TRUE (Evnt_Isr.status == osErrorISR);
+
+    // [ILG]
+    // Test the infinite timeout too.
+    Evnt_Isr.status = osOK;
+    ISR_ExNum = 4; /* Test: osSignalWait (with infinite timeout) */
+    NVIC_SetPendingIRQ((IRQn_Type)0);
+    osDelay (2);
+    ASSERT_TRUE (Evnt_Isr.status == osErrorISR);
+    // -----
     
     NVIC_DisableIRQ((IRQn_Type)0);
 

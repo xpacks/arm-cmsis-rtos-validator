@@ -9,6 +9,10 @@
 
 #include <stdint.h>
 
+// [ILG]
+// Include the vendor specific CMSIS file.
+#include "cmsis_device.h"
+
 /* Expansion macro used to create CMSIS Driver references */
 #define EXPAND_SYMBOL(name, port) name##port
 #define CREATE_SYMBOL(name, port) EXPAND_SYMBOL(name, port)
@@ -18,7 +22,11 @@ extern void (*TST_IRQHandler)(void);
 extern uint32_t ISR_ExNum;
 
 // Test main function
-extern void cmsis_rv (void);
+// [ILG]
+// For integration with a test environment, the test must return a
+// success/fail information.
+extern int cmsis_rv (void);
+// extern void cmsis_rv (void);
 
 // Test cases
 extern void TC_ThreadCreate (void);

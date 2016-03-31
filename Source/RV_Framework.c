@@ -6,6 +6,12 @@
  *----------------------------------------------------------------------------*/
 #include "cmsis_rv.h" 
 #include "RV_Framework.h"
+// [ILG]
+#include "RV_Report.h"
+
+// [ILG]
+// Required to return a non zero value from cmsis_rv()
+extern TEST_REPORT  test_report;
 
 /*=======0=========1=========2=========3=========4=========5=========6=========7=========8=========9=========0=========1====*/
 /**
@@ -23,9 +29,14 @@
 Debug session dead end - debug script should close session here.
 */
 void closeDebug(void) {
-  __nop();
-  __nop();
-  __nop();
+// [ILG]
+// CMSIS defines NOP with upper case.
+  __NOP();
+  __NOP();
+  __NOP();
+//  __nop();
+//  __nop();
+//  __nop();
   // Test completed
 }
 
@@ -48,7 +59,11 @@ Program flow:
   -# Test report footer is written to the standard output
   -# Debug session ends in dead loop
 */
-void cmsis_rv (void) {
+
+// [ILG]
+// The test result is an int.
+int
+cmsis_rv (void) {
   const char *fn;
   uint32_t tc, no;
   
@@ -75,6 +90,10 @@ void cmsis_rv (void) {
   ritf.Close ();                          /* Close test report                */
 
   closeDebug();                           /* Close debug session              */
+
+  // [ILG]
+  // Return 0 for success, anything else for failure.
+  return test_report.failed;
 }
 
 /**

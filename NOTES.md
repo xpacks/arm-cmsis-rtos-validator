@@ -22,6 +22,16 @@ To save space, the following folders/files were removed:
 
 The actual files used by this package are in the `xpack` repository branch.
 
+## Warnings
+
+To silence warnings, the following options must be configured for the Source folder:
+
+```
+-Wno-aggregate-return -Wno-conversion -Wno-unused-parameter \
+-Wno-missing-prototypes -Wno-missing-declarations -Wno-sign-compare \
+-Wno-maybe-uninitialized -Wno-unused-function -Wno-format -Wno-padded
+```
+
 ## Tests
 
 * none

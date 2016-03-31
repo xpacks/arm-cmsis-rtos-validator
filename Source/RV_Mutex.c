@@ -118,7 +118,7 @@ static void RecursiveMutexAcquire (uint32_t depth, uint32_t ctrl) {
 
   if (stat == osOK) {
     if (ctrl == depth) {
-      /* - Verify that mutex was aqcuired at count zero */
+      /* - Verify that mutex was acquired at count zero */
       ASSERT_TRUE (acq == 0);
     }
     acq++;
@@ -138,7 +138,9 @@ static void RecursiveMutexAcquire (uint32_t depth, uint32_t ctrl) {
  * Thread waiting for mutex with G_MutexId
  *----------------------------------------------------------------------------*/
 static void Th_MutexWait (void const *arg) {
+  //fprintf(stderr, "Th_MutexWait entry\n");
   RecursiveMutexAcquire (3, 3);
+  //fprintf(stderr, "Th_MutexWait exit\n");
 }
 
 
@@ -217,6 +219,10 @@ void Th_HighPrioJob (void const *arg) {
         break;
       }
     }
+
+    // [ILG]
+    // Must release mutex before thread exit
+    osMutexRelease (G_MutexId);
   }
 }
 
@@ -227,6 +233,10 @@ void Th_MutexAcqLow  (void const *arg) {
   ASSERT_TRUE (osMutexWait (G_MutexId, 0) == osOK);
   
   osSignalWait (0x01, osWaitForever);
+
+  // [ILG]
+  // Must release mutex before thread exit
+  osMutexRelease (G_MutexId);
 }
 
 /*-----------------------------------------------------------------------------
@@ -354,11 +364,15 @@ void TC_MutexNestedAcquire (void) {
       ASSERT_TRUE (G_Mutex_ThreadId != NULL);
     
       /* - Recursively acquire and release a mutex object */
+      //fprintf(stderr, "TC_MutexNestedAcquire\n");
       RecursiveMutexAcquire (5, 5);
 
       /* - Release a mutex */
       stat = osMutexRelease (G_MutexId);
       ASSERT_TRUE (stat == osOK);
+
+      // [ILG] give the thread time to do its number
+      osDelay(100);
 
       /* - Verify that every subsequent call released the mutex */
       ASSERT_TRUE (osMutexRelease (G_MutexId) == osErrorResource);
@@ -503,6 +517,12 @@ void TC_MutexOwnership (void) {
       if (id[1] != NULL) {
         ASSERT_TRUE (osThreadTerminate (id[1]) == osOK);
       }
+
+      // [ILG]
+      // Notify the thread that acquired the mutex to release it.
+      osSignalSet(id[0], 0x1);
+      osDelay(10);
+
       ASSERT_TRUE (osThreadTerminate (id[0]) == osOK);
     }
   }
@@ -545,15 +565,37 @@ void TC_MutexInterrupts (void) {
   ASSERT_TRUE (ISR_MutexId != NULL);
   
   if (ISR_MutexId != NULL) {
+
+    // [ILG]
+    ISR_OsStat = osOK;
+
     NVIC_SetPendingIRQ((IRQn_Type)0);
+
+    // [ILG]
+    osDelay(2);
+
     ASSERT_TRUE (ISR_OsStat == osErrorISR);
   
+    // [ILG]
+    ISR_OsStat = osOK;
+
     Isr.Ex_Num = 2; /* Test: osMutexRelease */
     NVIC_SetPendingIRQ((IRQn_Type)0);
+
+    // [ILG]
+    osDelay(2);
+
     ASSERT_TRUE (ISR_OsStat == osErrorISR);
     
+    // [ILG]
+    ISR_OsStat = osOK;
+
     Isr.Ex_Num = 3; /* Test: osMutexDelete */
     NVIC_SetPendingIRQ((IRQn_Type)0);
+
+    // [ILG]
+    osDelay(2);
+
     ASSERT_TRUE (ISR_OsStat == osErrorISR);
     
     /* Delete mutex */

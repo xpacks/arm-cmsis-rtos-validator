@@ -79,6 +79,16 @@ void MsgQueue_IRQHandler (void) {
     case 6: /* TC_MsgFromISRToThread */
       Isr_MsgSend ();
       break;
+
+    // [ILG]
+    // Test the infinite timeout calls too.
+    case 7:
+      MsgQSt_Isr = osMessagePut (MsgQId_Isr, 0x02, osWaitForever);
+      break;
+    case 8:
+      MsgQEv_Isr = osMessageGet (MsgQId_Isr, osWaitForever);
+      break;
+    // ---
   }
 }
 
@@ -283,8 +293,15 @@ void TC_MsgQInterrupts (void) {
   
   NVIC_EnableIRQ((IRQn_Type)0);
   
+  // [ILG]
+  MsgQId_Isr = (osMessageQId)(0-1);
+
   ISR_ExNum = 0;  /* Test: osMessageCreate */
   NVIC_SetPendingIRQ((IRQn_Type)0);
+
+  // [ILG]
+  osDelay(2);
+
   ASSERT_TRUE (MsgQId_Isr == NULL);
   
   if (MsgQId_Isr == NULL) {
@@ -292,21 +309,66 @@ void TC_MsgQInterrupts (void) {
     ASSERT_TRUE (MsgQId_Isr != NULL);
     
     if (MsgQId_Isr != NULL) {
+
+      // [ILG]
+      MsgQSt_Isr = osErrorOS;
+
       ISR_ExNum = 1; /* Test: osMessagePut, no time-out */
       NVIC_SetPendingIRQ((IRQn_Type)0);
+
+      // [ILG]
+      osDelay(2);
+
       ASSERT_TRUE (MsgQSt_Isr == osOK);
       
+      // [ILG]
+      MsgQSt_Isr = osOK;
+
       ISR_ExNum = 2; /* Test: osMessagePut, with time-out */
       NVIC_SetPendingIRQ((IRQn_Type)0);
+
+      // [ILG]
+      osDelay(2);
+
       ASSERT_TRUE (MsgQSt_Isr == osErrorParameter);
-      
+
+      // [ILG]
+      MsgQEv_Isr.status = osOK;
+
       ISR_ExNum = 3; /* Test: osMessageGet, no time-out */
       NVIC_SetPendingIRQ((IRQn_Type)0);
+
+      // [ILG]
+      osDelay(2);
+
       ASSERT_TRUE (MsgQEv_Isr.status == osEventMessage);
+
+      // [ILG]
+      MsgQEv_Isr.status = osOK;
 
       ISR_ExNum = 4; /* Test: osMessageGet, with time-out */
       NVIC_SetPendingIRQ((IRQn_Type)0);
+
+      // [ILG]
+      osDelay(2);
+
       ASSERT_TRUE (MsgQEv_Isr.status == osErrorParameter);
+
+      // [ILG]
+      // Test the infinite timeout too.
+      MsgQSt_Isr = osOK;
+      ISR_ExNum = 7; /* Test: osMessagePut, with infinite time-out */
+      NVIC_SetPendingIRQ((IRQn_Type)0);
+      osDelay(2);
+      ASSERT_TRUE (MsgQSt_Isr == osErrorParameter);
+
+      // Test the infinite timeout too.
+      MsgQEv_Isr.status = osOK;
+      ISR_ExNum = 8; /* Test: osMessageGet, with infinite time-out */
+      NVIC_SetPendingIRQ((IRQn_Type)0);
+      osDelay(2);
+      ASSERT_TRUE (MsgQEv_Isr.status == osErrorParameter);
+      // -----
     }
   }
   
