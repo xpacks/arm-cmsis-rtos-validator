@@ -12,7 +12,10 @@
 /*-----------------------------------------------------------------------------
  *      Test configuration
  *----------------------------------------------------------------------------*/
-#define RTOS_TICK_TIME          10000   /* Tick time in us                    */
+
+// [ILG]
+#define RTOS_TICK_TIME            (1000000/osKernelSysTickFrequency)
+// #define RTOS_TICK_TIME          10000   /* Tick time in us                    */
 
 #define ACCURACY_OS_DELAY           5   /* Wait accuracy in promiles          */
 #define ACCURACY_OS_WAIT            5   /* Wait accuracy in promiles          */
@@ -37,7 +40,7 @@ uint32_t Lim_OsSemaphoreWait[2];
 uint32_t Lim_OsMessageWait[2];
 uint32_t Lim_OsMailWait[2];
 
- #if (HW_PRESENT)
+#if (HW_PRESENT)
 /* Definitions for accessing Cortex registers */
 #define DWT_CTRL   *((volatile uint32_t *)0xE0001000)
 #define DWT_CYCCNT *((volatile uint32_t *)0xE0001004)
@@ -97,7 +100,9 @@ void StartCortexCycleCounter (void) {
     }
     /* Check if cycle counter is running */
     t[0] = DWT_CYCCNT;
-    __nop();
+    // [ILG]
+    __NOP();
+    // __nop();
     t[1] = DWT_CYCCNT;
     
     if (t[1] > t[0]) {
@@ -145,7 +150,10 @@ static void WaitFunc_Th_MutexLock (void const *arg) {
   /* Obtain a mutex */
   ASSERT_TRUE (osMutexWait (G_WaitFunc_MutexId, 0) == osOK);
 
-  osDelay (1000);                       /* This call should never return      */
+  // [ILG]
+  osDelay(250);
+  osMutexRelease(G_WaitFunc_MutexId);
+  //osDelay (1000);                       /* This call should never return      */
 }
 
 /*-----------------------------------------------------------------------------
@@ -359,6 +367,10 @@ void TC_MeasureOsMutexWaitTicks (void) {
     /* Check if cycle count is within defined accuracy */
     ASSERT_TRUE (long_wait > Lim_OsMutexWait[0] && long_wait < Lim_OsMutexWait[1]);
     ASSERT_TRUE (wait > Lim_OsMutexWait[0] && wait < Lim_OsMutexWait[1]);
+
+    // [ILG]
+    // Wait for the thread to terminate
+    osDelay(300);
 
     /* Delete mutex and terminate locking thread */
     ASSERT_TRUE (osMutexDelete (G_WaitFunc_MutexId) == osOK);
