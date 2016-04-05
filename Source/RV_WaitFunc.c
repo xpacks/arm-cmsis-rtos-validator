@@ -17,6 +17,8 @@
 #define RTOS_TICK_TIME            (1000000/osKernelSysTickFrequency)
 // #define RTOS_TICK_TIME          10000   /* Tick time in us                    */
 
+// [ILG]
+#if !defined(DEBUG)
 #define ACCURACY_OS_DELAY           5   /* Wait accuracy in promiles          */
 #define ACCURACY_OS_WAIT            5   /* Wait accuracy in promiles          */
 #define ACCURACY_OS_SIGNAL_WAIT     5   /* Wait accuracy in promiles          */
@@ -24,7 +26,16 @@
 #define ACCURACY_OS_SEMAPHORE_WAIT  5   /* Wait accuracy in promiles          */
 #define ACCURACY_OS_MESSAGE_WAIT    5   /* Wait accuracy in promiles          */
 #define ACCURACY_OS_MAIL_WAIT       5   /* Wait accuracy in promiles          */
-
+#else
+// Be slightly more permissive on DEBUG, to accommodate the asserts
+#define ACCURACY_OS_DELAY           6   /* Wait accuracy in promiles          */
+#define ACCURACY_OS_WAIT            6   /* Wait accuracy in promiles          */
+#define ACCURACY_OS_SIGNAL_WAIT     6   /* Wait accuracy in promiles          */
+#define ACCURACY_OS_MUTEX_WAIT      6   /* Wait accuracy in promiles          */
+#define ACCURACY_OS_SEMAPHORE_WAIT  6   /* Wait accuracy in promiles          */
+#define ACCURACY_OS_MESSAGE_WAIT    6   /* Wait accuracy in promiles          */
+#define ACCURACY_OS_MAIL_WAIT       6   /* Wait accuracy in promiles          */
+#endif
 
 /*-----------------------------------------------------------------------------
  *      Test implementation
