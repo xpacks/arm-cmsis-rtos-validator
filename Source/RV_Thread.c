@@ -168,16 +168,25 @@ void Th_Child_0 (void const *arg) {
   uint32_t *arr = (uint32_t *)arg;
   arr[0] = 1;
   ASSERT_TRUE (osThreadCreate (osThread (Th_Child_1), &arr[1]) != NULL);
+
+  // [ILG]
+  osDelay(6);
 }
 void Th_Child_1 (void const *arg) {
   uint32_t *arr = (uint32_t *)arg;
   arr[0] = 2;
   ASSERT_TRUE (osThreadCreate (osThread (Th_Child_2), &arr[1]) != NULL);
+
+  // [ILG]
+  osDelay(4);
 }
 void Th_Child_2 (void const *arg) {
   uint32_t *arr = (uint32_t *)arg;
   arr[0] = 3;
   ASSERT_TRUE (osThreadCreate (osThread (Th_Child_3), &arr[1]) != NULL);
+
+  // [ILG]
+  osDelay(2);
 }
 void Th_Child_3 (void const *arg) {
   uint32_t *arr = (uint32_t *)arg;
