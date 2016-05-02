@@ -178,10 +178,14 @@ void TC_TimerPeriodic (void) {
     ASSERT_TRUE (osTimerStart (id, 10) == osOK);
     
     /* Wait for timer interval */
-    for (i = 10000000; i; i--) {
+    // [ILG]
+    for (i = 40; i; i--) {
+    // for (i = 10000000; i; i--) {
       if (Tim_Var_Per > 2) {
         break;
       }
+      // [ILG]
+      osDelay(1);
     }
     ASSERT_TRUE (i != 0);
     ASSERT_TRUE (Tim_Var_Per > 2);

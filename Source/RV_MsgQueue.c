@@ -427,6 +427,8 @@ void TC_MsgFromThreadToISR (void) {
             /* MesssagePut should only fail if queue full */
             ASSERT_TRUE (stat == osErrorResource);
           }
+          // [ILG]
+          osDelay(1);
         }
         while (osSignalWait (SIGNAL_TIMER_TOUT, 0).status != osEventSignal);
       }
@@ -493,6 +495,8 @@ void TC_MsgFromISRToThread (void) {
             /* Message get should only fail if queue empty */
             ASSERT_TRUE (evt.status == osOK);
           }
+          // [ILG]
+          osDelay(1);
         }
         while (osSignalWait (SIGNAL_TIMER_TOUT, 0).status != osEventSignal);
       }

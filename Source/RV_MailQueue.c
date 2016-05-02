@@ -746,6 +746,8 @@ void TC_MailFromThreadToISR (void) {
               cnt++;
             }
           }
+          // [ILG]
+          osDelay(1);
         }
         while (osSignalWait (SIGNAL_TIMER_TOUT, 0).status != osEventSignal);
       }
@@ -824,6 +826,8 @@ void TC_MailFromISRToThread (void) {
               ASSERT_TRUE (osMailFree (MailQ_Id, mo) == osOK);
             }
           }
+          // [ILG]
+          osDelay(1);
         }
         while (osSignalWait (SIGNAL_TIMER_TOUT, 0).status != osEventSignal);
       }
