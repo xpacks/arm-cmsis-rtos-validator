@@ -95,7 +95,7 @@ void Th_Sig (void const *arg) {
 // Thread used to test if the signal set can wake-up the thread before timeout
 void Th_Wakeup (void const *arg)
 {
-  osDelay(10);
+  osDelay((int)arg);
   /* Send signal back to the main thread */
   ASSERT_TRUE (osSignalSet (Var_ThreadId, 1) != 0x80000000);
 }
@@ -248,6 +248,8 @@ void TC_SignalMainThread (void) {
   
   if (t_id != NULL) {
     /* Clear signal flags */
+    // [ILG]
+    flags = (1 << osFeature_Signals) - 1;
     osSignalClear (t_id, flags);
     
     /* Set all signal flags */
@@ -313,40 +315,40 @@ void TC_SignalChildToParent (void) {
       // returns before the timeout expires if the signal is raised.
 
       // Time known durations, to be used as thresholds.
+      osDelay(1);
       uint32_t bg = osKernelSysTick();
-      osDelay(9);
+      osDelay(49);
       uint32_t t_min = osKernelSysTick() - bg;
 
+      osDelay(1);
       bg = osKernelSysTick();
-      osDelay(14);
+      osDelay((50+100)/2); // Halfway
       uint32_t t_max = osKernelSysTick() - bg;
 
-      // The thread will set a signal after 10 ticks.
-      ThId_Sig = osThreadCreate(osThread(Th_Wakeup), NULL);
+      // The thread will set a signal after 50 ticks.
+      ThId_Sig = osThreadCreate(osThread(Th_Wakeup), (void*)50);
       ASSERT_TRUE (ThId_Sig != NULL);
 
       if (ThId_Sig != NULL) {
           bg = osKernelSysTick();
           evt = osSignalWait (1, 100);
-          uint32_t t_10 = osKernelSysTick() - bg;
+          uint32_t t_x = osKernelSysTick() - bg;
           ASSERT_TRUE (evt.status == osEventSignal);
-          // The actual wait should be between 8 and 12.
-          ASSERT_TRUE (t_min < t_10);
-          ASSERT_TRUE (t_10 < t_max);
+          ASSERT_TRUE (t_min <= t_x);
+          ASSERT_TRUE (t_x < t_max);
       }
       ASSERT_TRUE (osThreadTerminate(ThId_Sig) == osOK);
 
-      ThId_Sig = osThreadCreate(osThread(Th_Wakeup), NULL);
+      ThId_Sig = osThreadCreate(osThread(Th_Wakeup), (void*)50);
       ASSERT_TRUE (ThId_Sig != NULL);
 
       if (ThId_Sig != NULL) {
           bg = osKernelSysTick();
           evt = osSignalWait (1, osWaitForever);
-          uint32_t t_10 = osKernelSysTick() - bg;
+          uint32_t t_x = osKernelSysTick() - bg;
           ASSERT_TRUE (evt.status == osEventSignal);
-          // The actual wait should be between 8 and 12.
-          ASSERT_TRUE (t_min < t_10);
-          ASSERT_TRUE (t_10 < t_max);
+          ASSERT_TRUE (t_min <= t_x);
+          ASSERT_TRUE (t_x < t_max);
       }
       ASSERT_TRUE (osThreadTerminate(ThId_Sig) == osOK);
       // ---
@@ -434,6 +436,7 @@ void TC_SignalWaitTimeout (void) {
   int32_t    flags;
 
   Var_ThreadId = osThreadGetId();
+
   ASSERT_TRUE (Var_ThreadId != NULL);
   
   if (Var_ThreadId != NULL) {
