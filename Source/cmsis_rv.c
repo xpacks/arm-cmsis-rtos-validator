@@ -122,6 +122,7 @@ static TEST_CASE TC_LIST[] = {
   TCD ( TC_MailFromThreadToISR,                  1      ),
   TCD ( TC_MailFromISRToThread,                  1      ),
 #endif 
+#if !defined(__APPLE__)
 #ifdef RTE_RV_WAITFUNC
   TCD ( TC_MeasureOsDelayTicks,                  1      ),
   TCD ( TC_MeasureOsWaitTicks,                   1      ),
@@ -131,6 +132,7 @@ static TEST_CASE TC_LIST[] = {
   TCD ( TC_MeasureOsMessageWaitTicks,            1      ),
   TCD ( TC_MeasureOsMailWaitTicks,               1      ),
 #endif 
+#endif
 };                                                              
 
 /*-----------------------------------------------------------------------------
