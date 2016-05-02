@@ -4,14 +4,18 @@
  *----------------------------------------------------------------------------
  *      Copyright(c) KEIL - An ARM Company
  *----------------------------------------------------------------------------*/
-#ifndef __CMSIS_RV_H
-#define __CMSIS_RV_H
+#ifndef CMSIS_RV_H_
+#define CMSIS_RV_H_
 
 #include <stdint.h>
 
 // [ILG]
 // Include the vendor specific CMSIS file.
+#if defined(__ARM_EABI__)
 #include "cmsis_device.h"
+#else
+
+#endif
 
 /* Expansion macro used to create CMSIS Driver references */
 #define EXPAND_SYMBOL(name, port) name##port
@@ -110,4 +114,4 @@ extern void TC_MeasureOsSemaphoreWaitTicks (void);
 extern void TC_MeasureOsMessageWaitTicks (void);
 extern void TC_MeasureOsMailWaitTicks (void);
 
-#endif /* __CMSIS_RV_H */
+#endif /* CMSIS_RV_H_ */
