@@ -31,9 +31,11 @@ Debug session dead end - debug script should close session here.
 void closeDebug(void) {
 // [ILG]
 // CMSIS defines NOP with upper case.
+#if defined(__ARM_EABI__)
   __NOP();
   __NOP();
   __NOP();
+#endif
 //  __nop();
 //  __nop();
 //  __nop();
