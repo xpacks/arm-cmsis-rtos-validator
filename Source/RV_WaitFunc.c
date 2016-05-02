@@ -97,6 +97,7 @@ MAIL_OBJ *G_MailPtr;
  *      Initialization: ensure that cycle counter is running
  *----------------------------------------------------------------------------*/
 void StartCortexCycleCounter (void) {
+#if defined(__ARM_EABI__)
 #if (HW_PRESENT)
   uint32_t t[2];
   
@@ -151,6 +152,7 @@ void StartCortexCycleCounter (void) {
 
   Lim_OsMailWait[0]      = TickCyc - (TickCyc * ACCURACY_OS_MAIL_WAIT / 1000);
   Lim_OsMailWait[1]      = TickCyc + (TickCyc * ACCURACY_OS_MAIL_WAIT / 1000);
+#endif
 }
 
 
