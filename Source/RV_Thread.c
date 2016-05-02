@@ -170,7 +170,7 @@ void Th_Child_0 (void const *arg) {
   ASSERT_TRUE (osThreadCreate (osThread (Th_Child_1), &arr[1]) != NULL);
 
   // [ILG]
-  osDelay(6);
+  osDelay(40);
 }
 void Th_Child_1 (void const *arg) {
   uint32_t *arr = (uint32_t *)arg;
@@ -178,7 +178,7 @@ void Th_Child_1 (void const *arg) {
   ASSERT_TRUE (osThreadCreate (osThread (Th_Child_2), &arr[1]) != NULL);
 
   // [ILG]
-  osDelay(4);
+  osDelay(30);
 }
 void Th_Child_2 (void const *arg) {
   uint32_t *arr = (uint32_t *)arg;
@@ -186,7 +186,7 @@ void Th_Child_2 (void const *arg) {
   ASSERT_TRUE (osThreadCreate (osThread (Th_Child_3), &arr[1]) != NULL);
 
   // [ILG]
-  osDelay(2);
+  osDelay(20);
 }
 void Th_Child_3 (void const *arg) {
   uint32_t *arr = (uint32_t *)arg;
@@ -229,7 +229,7 @@ The test cases check the osThread* functions.
 */
 void TC_ThreadCreate (void) {
   uint32_t arg = 0xFF;
-  
+
   Var_ThreadExec = 0;
 
   /* - Create threads with different priorities and pass NULL argument to them */
