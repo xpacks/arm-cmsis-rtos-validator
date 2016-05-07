@@ -30,7 +30,9 @@ osThreadDef (Th_ChildSignals, osPriorityNormal, 1, 0);
 
 void Th_Sig (void const *arg);          /* Signaling thread prototype         */
 
-osThreadDef (Th_Sig, osPriorityNormal, 1, 200);
+// [ILG]
+// osThreadDef (Th_Sig, osPriorityNormal, 1, 200);
+osThreadDef (Th_Sig, osPriorityNormal, 1, 0);
 osThreadId ThId_Sig;
 
 // [ILG]
@@ -317,7 +319,7 @@ void TC_SignalChildToParent (void) {
       // Time known durations, to be used as thresholds.
       osDelay(1);
       uint32_t bg = osKernelSysTick();
-      osDelay(49);
+      osDelay(40);
       uint32_t t_min = osKernelSysTick() - bg;
 
       osDelay(1);
@@ -325,6 +327,7 @@ void TC_SignalChildToParent (void) {
       osDelay((50+100)/2); // Halfway
       uint32_t t_max = osKernelSysTick() - bg;
 
+      osDelay(1);
       // The thread will set a signal after 50 ticks.
       ThId_Sig = osThreadCreate(osThread(Th_Wakeup), (void*)50);
       ASSERT_TRUE (ThId_Sig != NULL);
@@ -339,6 +342,7 @@ void TC_SignalChildToParent (void) {
       }
       ASSERT_TRUE (osThreadTerminate(ThId_Sig) == osOK);
 
+      osDelay(1);
       ThId_Sig = osThreadCreate(osThread(Th_Wakeup), (void*)50);
       ASSERT_TRUE (ThId_Sig != NULL);
 
@@ -353,14 +357,14 @@ void TC_SignalChildToParent (void) {
       ASSERT_TRUE (osThreadTerminate(ThId_Sig) == osOK);
       // ---
 
-    /* Create signaling thread */
+    /* Create signalling thread */
     ThId_Sig = osThreadCreate (osThread (Th_Sig), &arg);
     ASSERT_TRUE (ThId_Sig != NULL);
     
     if (ThId_Sig != NULL) {
       flag = 0x00000001;
       do {
-        /* Send signal to the signaling thread */
+        /* Send signal to the signalling thread */
         ASSERT_TRUE (osSignalSet (ThId_Sig, flag) != 0x80000000);
         flag <<= 1;
         if (flag < (1 << osFeature_Signals)) {
