@@ -58,14 +58,24 @@ osStatus    MailQ_Stat_Isr;
 
 /* Definitions for TC_MailFromThreadToISR */
 #define MAIL_THREAD_TO_ISR_PERIOD     2 /* Interrupt period in miliseconds    */
+// [ILG]
+#if defined(DEBUG)
+#define MAIL_THREAD_TO_ISR_TIMEOUT 500 /* Timeout in ms ->  1sec @ 2ms       */
+#else
 #define MAIL_THREAD_TO_ISR_TIMEOUT 2500 /* Timeout in ms ->  5sec @ 2ms       */
+#endif
 
 static void Isr_MailReceive (void);
 
 
 /* Definitions for TC_MailFromISRToThread */
 #define MAIL_ISR_TO_THREAD_PERIOD     2 /* Interrupt period in miliseconds    */
+// [ILG]
+#if defined(DEBUG)
+#define MAIL_ISR_TO_THREAD_TIMEOUT 500 /* Timeout in ms ->  1sec @ 2ms       */
+#else
 #define MAIL_ISR_TO_THREAD_TIMEOUT 2500 /* Timeout in ms ->  5sec @ 2ms       */
+#endif
 
 static void Isr_MailSend (void);
 
