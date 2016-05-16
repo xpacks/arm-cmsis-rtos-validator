@@ -436,7 +436,9 @@ void TC_SemaphoreWaitTimeout (void) {
     ASSERT_TRUE (evt.status == osOK);
     
     /* Wait for child thread to set a signal */
-    osDelay (2);
+    // [ILG]
+    // osDelay (2);
+    osDelay (3);
     evt = osSignalWait (0x02, 0);
     ASSERT_TRUE (evt.status == osEventSignal);
     
