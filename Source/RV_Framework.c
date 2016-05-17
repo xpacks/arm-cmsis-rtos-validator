@@ -94,8 +94,8 @@ cmsis_rv (void) {
   closeDebug();                           /* Close debug session              */
 
   // [ILG]
-  // Return 0 for success, anything else for failure.
-  return test_report.failed;
+  // Return 0 for success, 1 for failure.
+  return test_report.failed ? 1 : 0;
 }
 
 /**
