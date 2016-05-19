@@ -122,7 +122,7 @@ static TEST_CASE TC_LIST[] = {
   TCD ( TC_MailFromThreadToISR,                  1      ),
   TCD ( TC_MailFromISRToThread,                  1      ),
 #endif 
-#if !defined(__APPLE__)
+#if !defined(__APPLE__) && !defined(__linux__)
 #ifdef RTE_RV_WAITFUNC
   TCD ( TC_MeasureOsDelayTicks,                  1      ),
   TCD ( TC_MeasureOsWaitTicks,                   1      ),

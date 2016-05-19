@@ -30,7 +30,8 @@
 #include <cmsis-plus/rtos/os-c-api.h>
 #include <cmsis-plus/diag/trace.h>
 
-#if defined(__APPLE__)
+#if defined(__APPLE__) || defined(__linux__)
+
 
 #include <signal.h>
 #include <unistd.h>
@@ -46,7 +47,7 @@ os_main (int argc, char* argv[])
 {
   trace_dump_args (argc, argv);
 
-#if defined(__APPLE__)
+#if defined(__APPLE__)  || defined(__linux__)
   sigusr1_init ();
 #endif
 
@@ -83,7 +84,7 @@ vApplicationStackOverflowHook (void* task, const char* name)
     printf (">>> Stack overflow %p '%s'!\n", task, name);
   }
 
-#elif defined(__APPLE__)
+#elif defined(__APPLE__) || defined(__linux__)
 
 extern uint32_t signal_nesting;
 
@@ -108,6 +109,8 @@ sigusr1_handler (int signum)
 {
   if (signum == SIGUSR1)
     {
+      signal (SIGUSR1, sigusr1_handler);
+
       if (TST_IRQHandler != NULL)
         {
           signal_nesting++;
