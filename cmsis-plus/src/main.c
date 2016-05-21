@@ -32,7 +32,6 @@
 
 #if defined(__APPLE__) || defined(__linux__)
 
-
 #include <signal.h>
 #include <unistd.h>
 
@@ -96,12 +95,25 @@ sigusr1_handler (int signum);
 void
 sigusr1_init (void)
 {
+  struct sigaction sa;
+  sigemptyset(&sa.sa_mask);
+  sigaddset(&sa.sa_mask, SIGALRM);
+#if defined(__APPLE__)
+  sa.__sigaction_u.__sa_handler = sigusr1_handler;
+#elif defined(__linux__)
+  sa.sa_handler = sigusr1_handler;
+#else
+#error Unsupported platform.
+#endif
+
+  // restart system on signal return
+  sa.sa_flags = SA_RESTART;
+  sigaction (SIGUSR1, &sa, NULL);
+
   sigemptyset(&sigusr1_set);
   sigaddset(&sigusr1_set, SIGUSR1);
 
   sigprocmask (SIG_BLOCK, &sigusr1_set, NULL);
-
-  signal (SIGUSR1, sigusr1_handler);
 }
 
 void
@@ -109,15 +121,11 @@ sigusr1_handler (int signum)
 {
   if (signum == SIGUSR1)
     {
-      signal (SIGUSR1, sigusr1_handler);
-
       if (TST_IRQHandler != NULL)
         {
           signal_nesting++;
           TST_IRQHandler ();
           signal_nesting--;
-
-          return;
         }
     }
   else
@@ -139,21 +147,21 @@ NVIC_SetPendingIRQ (int i);
 void
 NVIC_DisableIRQ (int i __attribute__((unused)))
 {
-  trace_printf("%s()\n", __func__);
+  trace_printf ("%s()\n", __func__);
   sigprocmask (SIG_BLOCK, &sigusr1_set, NULL);
 }
 
 void
 NVIC_EnableIRQ (int i __attribute__((unused)))
 {
-  trace_printf("%s()\n", __func__);
+  trace_printf ("%s()\n", __func__);
   sigprocmask (SIG_UNBLOCK, &sigusr1_set, NULL);
 }
 
 void
 NVIC_SetPendingIRQ (int i __attribute__((unused)))
 {
-  trace_printf("%s()\n", __func__);
+  trace_printf ("%s()\n", __func__);
   kill (getpid (), SIGUSR1);
 }
 
