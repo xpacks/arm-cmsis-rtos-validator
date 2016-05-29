@@ -42,10 +42,8 @@ sigusr1_init (void);
 
 int
 //os_main (int argc, char* argv[])
-os_main (int argc, char* argv[])
+os_main (int argc __attribute__((unused)), char* argv[] __attribute__((unused)))
 {
-  trace_dump_args (argc, argv);
-
 #if defined(__APPLE__)  || defined(__linux__)
   sigusr1_init ();
 #endif
@@ -92,6 +90,9 @@ static sigset_t sigusr1_set;
 void
 sigusr1_handler (int signum);
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wsign-conversion"
+
 void
 sigusr1_init (void)
 {
@@ -115,6 +116,8 @@ sigusr1_init (void)
 
   sigprocmask (SIG_BLOCK, &sigusr1_set, NULL);
 }
+
+#pragma GCC diagnostic pop
 
 void
 sigusr1_handler (int signum)
