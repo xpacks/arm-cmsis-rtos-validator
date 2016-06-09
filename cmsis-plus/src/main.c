@@ -72,15 +72,6 @@ WWDG_IRQHandler (void)
     ;
   }
 
-void
-vApplicationStackOverflowHook (void* task, const char* name);
-
-void
-vApplicationStackOverflowHook (void* task, const char* name)
-  {
-    printf (">>> Stack overflow %p '%s'!\n", task, name);
-  }
-
 #elif defined(__APPLE__) || defined(__linux__)
 
 extern uint32_t signal_nesting;
