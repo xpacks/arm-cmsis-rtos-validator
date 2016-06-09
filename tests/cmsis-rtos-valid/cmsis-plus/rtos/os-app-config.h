@@ -42,9 +42,34 @@
 #endif
 
 #if defined(__ARM_EABI__)
+
+#define OS_INTEGER_RTOS_DEFAULT_STACK_SIZE_BYTES (1600)
+#define OS_INTEGER_RTOS_MIN_STACK_SIZE_BYTES (1500)
+
+#if 1
 // Disable all interrupts from 15 to 4, keep 3-2-1 enabled
 #define OS_INTEGER_RTOS_CRITICAL_SECTION_INTERRUPT_PRIORITY (4)
 #endif
+
+#endif
+
+// ----------------------------------------------------------------------------
+
+#if defined(USE_FREERTOS)
+
+// Request the inclusion of a custom implementations.
+#define OS_INCLUDE_RTOS_PORT_SCHEDULER                      (1)
+
+#if 1
+#define OS_INCLUDE_RTOS_PORT_TIMER                          (1)
+#define OS_INCLUDE_RTOS_PORT_SYSTICK_CLOCK_SLEEP_FOR        (1)
+#define OS_INCLUDE_RTOS_PORT_MUTEX                          (1)
+#define OS_INCLUDE_RTOS_PORT_SEMAPHORE                      (1)
+#define OS_INCLUDE_RTOS_PORT_MESSAGE_QUEUE                  (1)
+#define OS_INCLUDE_RTOS_PORT_EVENT_FLAGS                    (1)
+#endif
+
+#endif /* defined(USE_FREERTOS) */
 
 // ----------------------------------------------------------------------------
 
