@@ -338,6 +338,11 @@ void TC_SignalChildToParent (void) {
           uint32_t t_x = osKernelSysTick() - bg;
           ASSERT_TRUE (evt.status == osEventSignal);
           ASSERT_TRUE (t_min <= t_x);
+#if 0
+          if (t_x >= t_max) {
+              printf("1 - %d >= %d\n", t_x, t_max);
+          }
+#endif
           ASSERT_TRUE (t_x < t_max);
       }
       ASSERT_TRUE (osThreadTerminate(ThId_Sig) == osOK);
