@@ -53,6 +53,9 @@
 
 #endif
 
+#define OS_INCLUDE_RTOS_STATISTICS_THREAD_CONTEXT_SWITCHES  (1)
+#define OS_INCLUDE_RTOS_STATISTICS_THREAD_CPU_CYCLES        (1)
+
 // ----------------------------------------------------------------------------
 
 #if defined(USE_FREERTOS)
