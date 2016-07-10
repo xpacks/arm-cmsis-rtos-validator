@@ -107,9 +107,12 @@ static void Th_TestSemaphore (void const *arg) {
  *----------------------------------------------------------------------------*/
 static void Th_SemaphoreWait (void const *arg) {
   uint32_t   ticks = *((uint32_t *)arg);
-  
+
+  // [ILG]
+#if defined(OS_INCLUDE_RTOS_THREAD_PUBLIC_FLAGS_CLEAR)
   /* Clear signals */
   osSignalClear (G_Semaphore_ThreadId, 0x03);  
+#endif
   
   if (osSemaphoreWait (G_SemaphoreId, ticks) != 0) {
     osSignalSet (G_Semaphore_ThreadId, 0x01);     /* Send signal: semaphore obtained    */
@@ -424,6 +427,12 @@ void TC_SemaphoreWaitTimeout (void) {
     /* Synchronize to the time slice */
     osDelay (1);
     
+    // [ILG]
+#if !defined(OS_INCLUDE_RTOS_THREAD_PUBLIC_FLAGS_CLEAR)
+    /* Clear signals */
+    osSignalClear (G_Semaphore_ThreadId, 0x03);
+#endif
+
     /* - Create a child thread that waits for a semaphore */
     wait_ticks = 10;
     ASSERT_TRUE (osThreadCreate (osThread (Th_SemaphoreWait), &wait_ticks) != NULL);

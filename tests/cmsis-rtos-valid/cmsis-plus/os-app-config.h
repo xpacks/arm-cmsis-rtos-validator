@@ -87,7 +87,7 @@
 #define OS_TRACE_RTOS_SCHEDULER
 #define OS_TRACE_RTOS_SEMAPHORE
 #define OS_TRACE_RTOS_THREAD
-#define OS_TRACE_RTOS_THREAD_SIG
+#define OS_TRACE_RTOS_THREAD_FLAGS
 #define OS_TRACE_RTOS_TIMER
 
 #define OS_TRACE_LIBC_MALLOC
@@ -105,6 +105,8 @@
 #define OS_TRACE_RTOS_RTC_TICK
 
 #endif
+
+#define OS_INCLUDE_RTOS_THREAD_PUBLIC_FLAGS_CLEAR
 
 // ----------------------------------------------------------------------------
 
