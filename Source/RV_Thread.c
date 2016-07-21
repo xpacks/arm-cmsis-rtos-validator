@@ -424,6 +424,19 @@ void TC_ThreadGetId (void) {
     /* Restore priority of the main thread back to normal */
     ASSERT_TRUE (osThreadSetPriority (id_main, osPriorityNormal) == osOK);
   }
+
+  // [ILG]
+  // Terminate all threads before proceeding to next test
+  osDelay(50);
+#if 0
+  osThreadTerminate(id[0][0]);
+  osThreadTerminate(id[0][1]);
+  osThreadTerminate(id[0][2]);
+  osThreadTerminate(id[0][3]);
+  osThreadTerminate(id[0][4]);
+  osThreadTerminate(id[0][5]);
+  osThreadTerminate(id[0][6]);
+#endif
 }
 
 /*=======0=========1=========2=========3=========4=========5=========6=========7=========8=========9=========0=========1====*/
@@ -580,6 +593,19 @@ void TC_ThreadPriorityExec (void) {
   }
   /* - Restore main thread priority to osPriorityNormal */
   ASSERT_TRUE (osThreadSetPriority (main_id, osPriorityNormal) == osOK);
+
+  // [ILG]
+  // Terminate all threads before proceeding to next test
+  osDelay(50);
+#if 0
+  osThreadTerminate(inst[0]);
+  osThreadTerminate(inst[1]);
+  osThreadTerminate(inst[2]);
+  osThreadTerminate(inst[3]);
+  osThreadTerminate(inst[4]);
+  osThreadTerminate(inst[5]);
+  osThreadTerminate(inst[6]);
+#endif
 }
 
 /*=======0=========1=========2=========3=========4=========5=========6=========7=========8=========9=========0=========1====*/
@@ -605,7 +631,10 @@ void TC_ThreadChainedCreate (void) {
   
   /* - Wait until child threads are created */
   osDelay(50);
-  
+#if 0
+  // [ILG]
+  osDelay(50);
+#endif
   /* - Verify that all child threads were created */
   for (i = 0; i < 4; i++) {
     ASSERT_TRUE (arr[i] == (i + 1));
