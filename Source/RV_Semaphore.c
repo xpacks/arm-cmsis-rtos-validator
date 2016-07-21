@@ -290,6 +290,11 @@ void TC_SemaphoreWaitForBinary (void) {
   uint32_t par[] = {0, 1, 2};
   uint32_t i, j;
 
+  // [ILG]
+  for (i = 0; i < 3; i++) {
+    Var_ThreadStatus[i] = 0;
+  }
+
   /* - Create a binary semaphore */
   G_SemaphoreId = osSemaphoreCreate (osSemaphore (Sem_TestBin), 1);
   ASSERT_TRUE (G_SemaphoreId != NULL);
@@ -340,6 +345,11 @@ void TC_SemaphoreWaitForBinary (void) {
 void TC_SemaphoreWaitForCounting (void) {
   uint32_t par[] = {0, 1, 2, 3, 4};
   uint32_t i, acq, notacq;
+
+  // [ILG]
+  for (i = 0; i < 5; i++) {
+    Var_ThreadStatus[i] = 0;
+  }
 
   /* - Create semaphore */
   G_SemaphoreId = osSemaphoreCreate (osSemaphore (Sem_TestMul), 3);
