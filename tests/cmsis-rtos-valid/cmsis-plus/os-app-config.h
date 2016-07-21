@@ -46,7 +46,7 @@
 #define OS_INTEGER_RTOS_DEFAULT_STACK_SIZE_BYTES (1600)
 #define OS_INTEGER_RTOS_MIN_STACK_SIZE_BYTES (1500)
 
-#if 1
+#if 0
 // Disable all interrupts from 15 to 4, keep 3-2-1 enabled
 #define OS_INTEGER_RTOS_CRITICAL_SECTION_INTERRUPT_PRIORITY (4)
 #endif
@@ -97,6 +97,12 @@
 #define OS_TRACE_RTOS_RTC_TICK
 #define OS_TRACE_RTOS_LISTS
 #define OS_TRACE_RTOS_THREAD_CONTEXT
+#else
+//#define OS_TRACE_RTOS_SYSCLOCK_TICK
+#define OS_TRACE_RTOS_RTC_TICK
+//#define OS_TRACE_RTOS_LISTS
+//#define OS_TRACE_RTOS_THREAD_CONTEXT
+
 #endif
 
 #else
@@ -107,6 +113,7 @@
 #endif
 
 #define OS_INCLUDE_RTOS_THREAD_PUBLIC_FLAGS_CLEAR
+#define OS_BOOL_RTOS_THREAD_IDLE_PRIORITY_BELOW_IDLE
 
 // ----------------------------------------------------------------------------
 
