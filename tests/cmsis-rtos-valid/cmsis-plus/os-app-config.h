@@ -46,7 +46,7 @@
 #define OS_INTEGER_RTOS_DEFAULT_STACK_SIZE_BYTES (1600)
 #define OS_INTEGER_RTOS_MIN_STACK_SIZE_BYTES (1500)
 
-#if 0
+#if 1
 // Disable all interrupts from 15 to 4, keep 3-2-1 enabled
 #define OS_INTEGER_RTOS_CRITICAL_SECTION_INTERRUPT_PRIORITY (4)
 #endif
