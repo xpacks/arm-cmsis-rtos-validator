@@ -236,7 +236,11 @@ void TC_ThreadCreate (void) {
   ASSERT_TRUE (osThreadCreate (osThread(Th_Thr0), NULL) != NULL);
   ASSERT_TRUE (osThreadCreate (osThread(Th_Thr1), NULL) != NULL);
   ASSERT_TRUE (osThreadCreate (osThread(Th_Thr2), NULL) != NULL);
+  // [ILG]
+  osDelay(1);
   ASSERT_TRUE (osThreadCreate (osThread(Th_Thr3), NULL) != NULL);
+  // [ILG]
+  osDelay(1);
   ASSERT_TRUE (osThreadCreate (osThread(Th_Thr4), NULL) != NULL);
   ASSERT_TRUE (osThreadCreate (osThread(Th_Thr5), NULL) != NULL);
   ASSERT_TRUE (osThreadCreate (osThread(Th_Thr6), NULL) != NULL);
@@ -252,7 +256,11 @@ void TC_ThreadCreate (void) {
   ASSERT_TRUE (osThreadCreate (osThread(Th_Thr0), &arg) != NULL);
   ASSERT_TRUE (osThreadCreate (osThread(Th_Thr1), &arg) != NULL);
   ASSERT_TRUE (osThreadCreate (osThread(Th_Thr2), &arg) != NULL);
+  // [ILG]
+  osDelay(1);
   ASSERT_TRUE (osThreadCreate (osThread(Th_Thr3), &arg) != NULL);
+  // [ILG]
+  osDelay(1);
   ASSERT_TRUE (osThreadCreate (osThread(Th_Thr4), &arg) != NULL);
   ASSERT_TRUE (osThreadCreate (osThread(Th_Thr5), &arg) != NULL);
   ASSERT_TRUE (osThreadCreate (osThread(Th_Thr6), &arg) != NULL);
