@@ -473,6 +473,11 @@ void TC_SignalWaitTimeout (void) {
       ASSERT_TRUE (osSignalWait (1, 10).status == osEventSignal);
     }
 
+    // [ILG]
+    // Allow time to terminate
+    osDelay(10);
+    osThreadTerminate(id);
+
     /* - Create a signal setting thread */
     flags = 5;
     id = osThreadCreate (osThread (Th_SignalSet), &flags);
