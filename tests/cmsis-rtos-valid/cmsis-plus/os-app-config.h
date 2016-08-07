@@ -76,7 +76,7 @@
 
 // ----------------------------------------------------------------------------
 
-#if defined(DEBUG)
+#if defined(TRACE)
 
 #define OS_TRACE_RTOS_CLOCKS
 #define OS_TRACE_RTOS_CONDVAR
