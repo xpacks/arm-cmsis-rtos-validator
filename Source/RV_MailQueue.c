@@ -208,7 +208,18 @@ static void Isr_MailReceive (void) {
     if (mo != NULL) {
       /* - Verify mail content */
       memset(buf, (uint8_t)G_MailQ_Counter, MAIL_BUF_SZ);
+
+#if 0
       ASSERT_TRUE (memcmp(mo->Buf, buf, MAIL_BUF_SZ) == 0);
+#else
+      if (memcmp(mo->Buf, buf, MAIL_BUF_SZ) != 0) {
+          for (int i = 0; i < MAIL_BUF_SZ; ++i) {
+              printf("%02X ", mo->Buf[i]);
+          }
+          printf("   %p, %X\n", mo, G_MailQ_Counter);
+          ASSERT_TRUE (0);
+      }
+#endif
 
       G_MailQ_Counter++;                    /* Mail in sequence                     */
       
@@ -243,7 +254,9 @@ static void Isr_MailSend (void) {
     }
     else {
       /* Queue is full, free allocated memory block */
-      ASSERT_TRUE (stat == osErrorResource);
+      // [ILG]
+      // ASSERT_TRUE (stat == osErrorResource);
+      ASSERT_TRUE (stat == osErrorValue);
       ASSERT_TRUE (osMailFree (MailQ_Id, mo) == osOK);
     }
   }
@@ -448,7 +461,18 @@ void TC_MailFromThread (void) {
       
       /* - Verify mail content */
       memset(buf, 0xAA, MAIL_BUF_SZ);
+
+#if 0
       ASSERT_TRUE (memcmp(mo->Buf, buf, MAIL_BUF_SZ) == 0);
+#else
+      if (memcmp(mo->Buf, buf, MAIL_BUF_SZ) != 0) {
+          for (int i = 0; i < MAIL_BUF_SZ; ++i) {
+              printf("%02X ", mo->Buf[i]);
+          }
+          printf("   %p\n", mo);
+          ASSERT_TRUE (0);
+      }
+#endif
       
       /* - Free mail block */
       ASSERT_TRUE (osMailFree (MailQ_Id, mo) == osOK);
