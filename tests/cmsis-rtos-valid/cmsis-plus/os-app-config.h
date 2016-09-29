@@ -43,8 +43,8 @@
 
 #if defined(__ARM_EABI__)
 
-#define OS_INTEGER_RTOS_DEFAULT_STACK_SIZE_BYTES (1600)
-#define OS_INTEGER_RTOS_MIN_STACK_SIZE_BYTES (1500)
+#define OS_INTEGER_RTOS_DEFAULT_STACK_SIZE_BYTES (1500)
+#define OS_INTEGER_RTOS_MIN_STACK_SIZE_BYTES (1000)
 
 #if 1
 // Disable all interrupts from 15 to 4, keep 3-2-1 enabled
@@ -65,7 +65,7 @@
 
 #if 1
 #define OS_USE_RTOS_PORT_TIMER                          (1)
-#define OS_USE_RTOS_PORT_SYSTICK_CLOCK_SLEEP_FOR        (1)
+//#define OS_USE_RTOS_PORT_CLOCK_SYSTICK_WAIT_FOR        (1)
 #define OS_USE_RTOS_PORT_MUTEX                          (1)
 #define OS_USE_RTOS_PORT_SEMAPHORE                      (1)
 #define OS_USE_RTOS_PORT_MESSAGE_QUEUE                  (1)
