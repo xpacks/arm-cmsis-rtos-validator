@@ -216,7 +216,7 @@ static void Isr_MailReceive (void) {
           for (int i = 0; i < MAIL_BUF_SZ; ++i) {
               printf("%02X ", mo->Buf[i]);
           }
-          printf("   %p, %X\n", mo, G_MailQ_Counter);
+          printf("   %p, %X\n", (void*)mo, G_MailQ_Counter);
           ASSERT_TRUE (0);
       }
 #endif
@@ -469,7 +469,7 @@ void TC_MailFromThread (void) {
           for (int i = 0; i < MAIL_BUF_SZ; ++i) {
               printf("%02X ", mo->Buf[i]);
           }
-          printf("   %p\n", mo);
+          printf("   %p\n", (void*)mo);
           ASSERT_TRUE (0);
       }
 #endif
