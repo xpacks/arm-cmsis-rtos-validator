@@ -20,7 +20,7 @@ do_add_arm_cmsis_rtos_validator_xpack() {
   do_add_content "${pack_folder}/cmsis-plus/include"/*
 
   do_prepare_dest "${pack_name}/cmsis-rtos-valid/include"
-  do_add_content "${pack_folder}/tests/cmsis-rtos-valid"/*
+  do_add_content "${pack_folder}/test/cmsis-rtos-valid"/*
 
   do_prepare_dest "${pack_name}/arm/src"
   do_add_content "${pack_folder}/Source/"* 
