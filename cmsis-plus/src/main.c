@@ -94,7 +94,9 @@ sigusr1_init (void)
   sa.__sigaction_u.__sa_handler = sigusr1_handler;
 #elif defined(__linux__)
 #pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdisabled-macro-expansion"
+#if defined(__clang__)
+#pragma clang diagnostic ignored "-Wdisabled-macro-expansion"
+#endif
   sa.sa_handler = sigusr1_handler;
 #pragma GCC diagnostic pop
 #else
