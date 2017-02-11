@@ -93,7 +93,10 @@ sigusr1_init (void)
 #if defined(__APPLE__)
   sa.__sigaction_u.__sa_handler = sigusr1_handler;
 #elif defined(__linux__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdisabled-macro-expansion"
   sa.sa_handler = sigusr1_handler;
+#pragma GCC diagnostic pop
 #else
 #error Unsupported platform.
 #endif
