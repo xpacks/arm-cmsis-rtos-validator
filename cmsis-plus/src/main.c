@@ -125,7 +125,10 @@ sigusr1_handler (int signum)
   else
     {
       char q = '?';
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-result"
       write (2, &q, 1);
+#pragma GCC diagnostic pop
     }
 }
 
