@@ -149,21 +149,27 @@ NVIC_SetPendingIRQ (int i);
 void
 NVIC_DisableIRQ (int i __attribute__((unused)))
 {
+#if defined(TRACE)
   trace_printf ("%s()\n", __func__);
+#endif
   sigprocmask (SIG_BLOCK, &sigusr1_set, NULL);
 }
 
 void
 NVIC_EnableIRQ (int i __attribute__((unused)))
 {
+#if defined(TRACE)
   trace_printf ("%s()\n", __func__);
+#endif
   sigprocmask (SIG_UNBLOCK, &sigusr1_set, NULL);
 }
 
 void
 NVIC_SetPendingIRQ (int i __attribute__((unused)))
 {
+#if defined(TRACE)
   trace_printf ("%s()\n", __func__);
+#endif
   kill (getpid (), SIGUSR1);
 }
 
