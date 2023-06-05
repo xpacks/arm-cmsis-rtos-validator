@@ -8,7 +8,10 @@ NOTICE.md
 Release/
 Thumbs.db
 build/
-test-*/
-upload.tar.gz
-yotta_modules/
-yotta_targets/
+test*/
+*.tgz
+node_modules/
+xpacks/
+scripts/
+*.pdsc
+NOTES.md

@@ -1,0 +1,60 @@
+{
+  "name": "@xpacks/arm-cmsis-rtos-validator",
+  "version": "1.0.0-1",
+  "description": "A source code library with the Arm CMSIS RTOS validator",
+  "main": "",
+  "scripts": {
+    "npm-install": "npm install",
+    "pack": "npm pack",
+    "version-patch": "npm version patch",
+    "version-minor": "npm version minor",
+    "postversion": "git push origin --all && git push origin --tags",
+    "git-log": "git log --pretty='%cd * %h %s' --date=short"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xpacks/arm-cmsis-rtos-validator-xpack.git"
+  },
+  "homepage": "https://github.com/xpacks/arm-cmsis-rtos-validator-xpack",
+  "bugs": {
+    "url": "https://github.com/xpacks/arm-cmsis-rtos-validator-xpack/issues"
+  },
+  "keywords": [
+    "xpack",
+    "c++",
+    "micro-os-plus",
+    "arm",
+    "cmsis",
+    "rtos",
+    "validator",
+    "test"
+  ],
+  "author": {
+    "name": "Liviu Ionescu",
+    "email": "ilg@livius.net",
+    "url": "https://github.com/ilg-ul"
+  },
+  "contributors": [
+    {
+      "name": "Arm"
+    }
+  ],
+  "license": "LICENSE.pdf",
+  "config": {},
+  "dependencies": {},
+  "bundleDependencies": [],
+  "devDependencies": {},
+  "xpack": {
+    "minimumXpmRequired": "0.16.0",
+    "dependencies": {},
+    "$dependenciesUrls": [
+      "https://github.com/micro-os-plus",
+      "https://github.com/xpack-3rd-party",
+      "https://github.com/xpack-dev-tools"
+    ],
+    "devDependencies": {},
+    "properties": {},
+    "actions": {},
+    "buildConfigurations": {}
+  }
+}
