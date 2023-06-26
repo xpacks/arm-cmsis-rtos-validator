@@ -4,8 +4,8 @@
  *----------------------------------------------------------------------------
  *      Copyright(c) KEIL - An ARM Company
  *----------------------------------------------------------------------------*/
-#ifndef __FRAMEWORK_H__
-#define __FRAMEWORK_H__
+#ifndef RV_FRAMEWORK_H__
+#define RV_FRAMEWORK_H__
 
 #include "RV_Typedefs.h"
 #include "RV_Report.h"
@@ -41,4 +41,4 @@ typedef struct __TestSuite {
 /* Defined in user test module                                                */
 extern TEST_SUITE ts;
 
-#endif /* __FRAMEWORK_H__ */
+#endif /* RV_FRAMEWORK_H__ */
