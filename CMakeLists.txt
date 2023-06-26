@@ -50,19 +50,19 @@ target_include_directories(xpacks-arm-cmsis-os-validator-interface INTERFACE
 
 target_sources(xpacks-arm-cmsis-os-validator-interface INTERFACE
   cmsis-plus/src/main.c
-  source/RV_Framework.c
-  source/cmsis_rv.c
-  source/RV_Signal.c
-  source/RV_Report.c
-  source/RV_Thread.c
-  source/RV_MailQueue.c
-  source/RV_Timer.c
-  source/RV_GenWait.c
-  source/RV_WaitFunc.c
-  source/RV_MemoryPool.c
-  source/RV_MsgQueue.c
-  source/RV_Mutex.c
-  source/RV_Semaphore.c
+  Source/RV_Framework.c
+  Source/cmsis_rv.c
+  Source/RV_Signal.c
+  Source/RV_Report.c
+  Source/RV_Thread.c
+  Source/RV_MailQueue.c
+  Source/RV_Timer.c
+  Source/RV_GenWait.c
+  Source/RV_WaitFunc.c
+  Source/RV_MemoryPool.c
+  Source/RV_MsgQueue.c
+  Source/RV_Mutex.c
+  Source/RV_Semaphore.c
 )
 
 target_compile_definitions(xpacks-arm-cmsis-os-validator-interface INTERFACE
