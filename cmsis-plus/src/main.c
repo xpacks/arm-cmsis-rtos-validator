@@ -36,8 +36,8 @@ os_main (int argc __attribute__((unused)), char* argv[] __attribute__((unused)))
   return cmsis_rv ();
 }
 
-extern void
-(*TST_IRQHandler) (void);
+// extern void
+// (*TST_IRQHandler) (void);
 
 #if defined(__ARM_EABI__)
 
