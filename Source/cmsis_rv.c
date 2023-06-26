@@ -9,6 +9,12 @@
 #include "RV_Framework.h"
 #include "RV_Config.h"
 
+#if defined(__clang__)
+#pragma clang diagnostic ignored "-Wmissing-prototypes"
+#elif defined(__GNUC__)
+#pragma GCC diagnostic ignored "-Wmissing-prototypes"
+#endif
+
 /*-----------------------------------------------------------------------------
  *      Variables declarations
  *----------------------------------------------------------------------------*/
@@ -138,6 +144,11 @@ static TEST_CASE TC_LIST[] = {
 /*-----------------------------------------------------------------------------
  *      Test suite description
  *----------------------------------------------------------------------------*/
+#pragma GCC diagnostic push
+#if defined(__clang__)
+#pragma clang diagnostic ignored "-Wdate-time"
+#elif defined(__GNUC__)
+#endif
 TEST_SUITE ts = {
   __FILE__, __DATE__, __TIME__,
   "CMSIS-RTOS Test Suite",
@@ -146,3 +157,5 @@ TEST_SUITE ts = {
   TC_LIST,
   ARRAY_SIZE (TC_LIST),  
 };  
+
+#pragma GCC diagnostic pop

@@ -9,6 +9,12 @@
 // [ILG]
 #include "RV_Report.h"
 
+#if defined(__clang__)
+#pragma clang diagnostic ignored "-Wmissing-prototypes"
+#elif defined(__GNUC__)
+#pragma GCC diagnostic ignored "-Wmissing-prototypes"
+#endif
+
 // [ILG]
 // Required to return a non zero value from cmsis_rv()
 extern TEST_REPORT  test_report;
