@@ -4,8 +4,8 @@
  *----------------------------------------------------------------------------
  *      Copyright(c) KEIL - An ARM Company
  *----------------------------------------------------------------------------*/
-#ifndef __RV_CONFIG_H
-#define __RV_CONFIG_H
+#ifndef RV_CONFIG_H_
+#define RV_CONFIG_H_
 
 #if defined(__ARM_EABI__)
 #include "cmsis_device.h"
@@ -43,4 +43,4 @@ NVIC_SetPendingIRQ(IRQn_Type);
 #define HW_PRESENT  (1)
 #endif
 
-#endif /* __RV_CONFIG_H */
+#endif /* RV_CONFIG_H_ */

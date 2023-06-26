@@ -4,8 +4,8 @@
  *----------------------------------------------------------------------------
  *      Copyright(c) KEIL - An ARM Company
  *----------------------------------------------------------------------------*/
-#ifndef __TYPEDEFS_H__
-#define __TYPEDEFS_H__
+#ifndef RV_TYPEDEFS_H__
+#define RV_TYPEDEFS_H__
 
 #include <stdint.h>
 #include <stdarg.h>
@@ -44,4 +44,4 @@ typedef unsigned int    BOOL;
 #define SET_RESULT(res, desc) __set_result(__FILENAME__, __LINE__, res, desc);
 #define ASSERT_TRUE(cond) __assert_true (__FILENAME__, __LINE__, cond);
 
-#endif /* __TYPEDEFS_H__ */
+#endif /* RV_TYPEDEFS_H__ */

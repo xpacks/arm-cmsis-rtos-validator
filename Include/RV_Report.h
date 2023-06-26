@@ -4,8 +4,8 @@
  *----------------------------------------------------------------------------
  *      Copyright(c) KEIL - An ARM Company
  *----------------------------------------------------------------------------*/
-#ifndef __REPORT_H__
-#define __REPORT_H__
+#ifndef RV_REPORT_H__
+#define RV_REPORT_H__
 
 #include "RV_Config.h"
 #include "RV_Typedefs.h"
@@ -86,4 +86,4 @@ extern REPORT_ITF   ritf;
 extern uint32_t __set_result (const char *fn, uint32_t ln, TC_RES res, char* desc);
 extern uint32_t __assert_true (const char *fn, uint32_t ln, uint32_t cond);
 
-#endif /* __REPORT_H__ */
+#endif /* RV_REPORT_H__ */
