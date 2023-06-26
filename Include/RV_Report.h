@@ -27,11 +27,20 @@ typedef enum {
   NOT_EXECUTED
 } TC_RES;
 
+#pragma GCC diagnostic push
+#if defined(__clang__)
+#pragma clang diagnostic ignored "-Wpadded"
+#elif defined(__GNUC__)
+#pragma GCC diagnostic ignored "-Wpadded"
+#endif
+
 /* Assertion result info */
 typedef struct {
   const char    *module;                  /* Module name                        */
   uint32_t       line;                    /* Assertion line                     */
 } AS_INFO;
+
+#pragma GCC diagnostic pop
 
 /* Test case callback interface definition */
 typedef struct {
@@ -82,8 +91,16 @@ extern TEST_REPORT  tr;
 /* Test report interface */
 extern REPORT_ITF   ritf;
 
+#pragma GCC diagnostic push
+#if defined(__clang__)
+#pragma clang diagnostic ignored "-Wreserved-identifier"
+#elif defined(__GNUC__)
+#endif
+
 /* Assertions and test results */
 extern uint32_t __set_result (const char *fn, uint32_t ln, TC_RES res, char* desc);
 extern uint32_t __assert_true (const char *fn, uint32_t ln, uint32_t cond);
+
+#pragma GCC diagnostic pop
 
 #endif /* RV_REPORT_H__ */

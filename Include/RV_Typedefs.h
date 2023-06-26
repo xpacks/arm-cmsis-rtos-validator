@@ -12,6 +12,13 @@
 #include <string.h>
 #include <stdio.h>
 
+#pragma GCC diagnostic push
+#if defined(__clang__)
+#pragma clang diagnostic ignored "-Wreserved-identifier"
+#pragma clang diagnostic ignored "-Wreserved-id-macro"
+#elif defined(__GNUC__)
+#endif
+
 typedef unsigned int    BOOL;
 
 #ifndef __TRUE
@@ -43,5 +50,7 @@ typedef unsigned int    BOOL;
 /* Assertions and test results */
 #define SET_RESULT(res, desc) __set_result(__FILENAME__, __LINE__, res, desc);
 #define ASSERT_TRUE(cond) __assert_true (__FILENAME__, __LINE__, cond);
+
+#pragma GCC diagnostic pop
 
 #endif /* RV_TYPEDEFS_H__ */

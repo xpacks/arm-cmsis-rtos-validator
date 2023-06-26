@@ -10,6 +10,12 @@
 #include "RV_Typedefs.h"
 #include "RV_Report.h"
 
+#pragma GCC diagnostic push
+#if defined(__clang__)
+#pragma clang diagnostic ignored "-Wreserved-identifier"
+#elif defined(__GNUC__)
+#endif
+
 /*-----------------------------------------------------------------------------
  * Test framework global definitions
  *----------------------------------------------------------------------------*/
@@ -37,6 +43,8 @@ typedef struct __TestSuite {
   uint32_t NumOfTC;                   /* Number of test cases (sz of TC array)*/
 
 } TEST_SUITE;
+
+#pragma GCC diagnostic pop
 
 /* Defined in user test module                                                */
 extern TEST_SUITE ts;
