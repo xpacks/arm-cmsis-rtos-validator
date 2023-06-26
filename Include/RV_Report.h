@@ -40,8 +40,6 @@ typedef struct {
   uint32_t       line;                    /* Assertion line                     */
 } AS_INFO;
 
-#pragma GCC diagnostic pop
-
 /* Test case callback interface definition */
 typedef struct {
   BOOL (* Result) (TC_RES res);
@@ -84,6 +82,8 @@ typedef struct {
   BOOL (* Open_TC)  (uint32_t num, const char *fn);
   BOOL (* Close_TC) (void);
 } REPORT_ITF;
+
+#pragma GCC diagnostic pop
 
 /* Test report statistics */
 extern TEST_REPORT  tr;

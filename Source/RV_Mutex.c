@@ -617,6 +617,7 @@ void TC_MutexInterrupts (void) {
   }
   
   NVIC_DisableIRQ((IRQn_Type)0);
+#endif // !defined(OS_SKIP_VALIDATOR_INTERRUPTS)
 }
 
 /**
