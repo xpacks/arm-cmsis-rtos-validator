@@ -1,82 +1,83 @@
-# ARM CMSIS RTOS Validator
+[![GitHub package.json version](https://img.shields.io/github/package-json/v/xpacks/arm-cmsis-rtos-validator)](https://github.com/xpacks/arm-cmsis-rtos-validator/blob/xpack/package.json)
+[![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/xpacks/arm-cmsis-rtos-validator)](https://github.com/xpacks/arm-cmsis-rtos-validator/tags/)
+[![npm (scoped)](https://img.shields.io/npm/v/@xpacks/arm-cmsis-rtos-validator.svg?color=blue)](https://www.npmjs.com/package/@xpacks/arm-cmsis-rtos-validator/)
+[![license](https://img.shields.io/github/license/xpacks/arm-cmsis-rtos-validator)](https://github.com/xpacks/arm-cmsis-rtos-validator/blob/xpack/LICENSE)
 
-An xPack with a selection of ARM CMSIS RTOS Validator files.
+# A source code library with the Arm CMSIS RTOS validator
 
-## Package
+This project provides a convenient way to integrate the
+[ARM::CMSIS-RTOS_Validation Pack](https://arm-software.github.io/CMSIS_5/RTOS/html/rtosValidation.html)
+into the xpm/npm ecosystem, by allowing to install it as a package dependency.
 
-[ARM CMSIS RTOS Validator](https://github.com/xpacks/arm-cmsis-rtos-validator) package details:
+The open-source project is hosted on GitHub as
+[xpacks/arm-cmsis-rtos-validator](https://github.com/xpacks/arm-cmsis-rtos-validator).
 
-* type: [xcdl](http://xcdl.github.io)
-* yotta name: `ilg-arm-cmsis-rtos-validator`
-* yotta repo: http://yotta.mbed.com/#/module/ilg-arm-cmsis-rtos-validator/1.0.0-1
-* git repo: https://github.com/xpacks/arm-cmsis-rtos-validator.git
-* homepage: https://github.com/xpacks/arm-cmsis-rtos-validator
-* latest archive: https://github.com/xpacks/arm-cmsis-rtos-validator/archive/xpack.zip
+## Install
 
-## Version
+This project is available from the `npmjs.com` registry as the package
+[`@xpacks/arm-cmsis-rtos-validator`](https://www.npmjs.com/package/@xpacks/arm-cmsis-rtos-validator),
+and the easiest way to add it to a project is via
+**xpm** or **npm**; it can also be used as any Git project, but for
+this better use the upstream project.
 
-* 1.0.0-1
+### Prerequisites
 
-## Releases
+A recent [xpm](https://xpack.github.io/xpm/),
+which is a portable [Node.js](https://nodejs.org/) command line application.
 
-* none
+It is recommended to update to the latest version with:
 
-## Package maintainers
+```sh
+npm install --global xpm@latest
+```
 
-* [Liviu Ionescu](http://liviusdotnet.worldpress.com) [&lt;ilg@livius.net&gt;](mailto:ilg@livius.net)
+For details please follow the instructions in the
+[xPack install](https://xpack.github.io/install/) page.
 
-## Content contributors
+### xpm
 
-* ARM
-* [Liviu Ionescu](http://liviusdotnet.worldpress.com) [&lt;ilg@livius.net&gt;](mailto:ilg@livius.net)
+To install this project as a dependency in xPack projects,
+use **xpm**:
 
-## Support
+```sh
+cd my-project
+xpm init # Unless a package.json is already present
 
-* [all issues](https://github.com/xpacks/arm-cmsis-rtos-validator/issues)
+xpm install @xpacks/arm-cmsis-rtos-validator@latest
 
-## Dependencies
+ls -l xpacks/@xpacks/arm-cmsis-rtos-validator
+```
 
-* none
+### npm
 
-## Keywords
+To install the project as a dependency in **npm** projects:
 
-* arm
-* cmsis
-* rtos
-* validator
-* test
+```sh
+cd my-project
+npm init # Unless a package.json is already present
 
-## License
+npm install @xpacks/arm-cmsis-rtos-validator@latest --save-dev
 
-* custom, see `LICENSE.pdf` in package root
+ls -l node_module/@xpacks/arm-cmsis-rtos-validator
+```
 
---- 
+## Branches
 
-## Documentation
+In addition to the original `main` branch, there are two
+xPack specific branches:
 
-To save space, this package does not contain documentation files. The current CMSIS documentation is available from [keil.com](http://www.keil.com/cmsis).
+- `xpack`, with the latest stable version (default)
+- `xpack-develop`, with the current development version
 
-## Examples
+All development is done in the `xpack-develop` branch, and contributions via
+Pull Requests should be directed to this branch.
 
-To save space, this package does not contain the original ARM examples.
+When new releases are published, the `xpack-develop` branch is merged
+into `xpack`.
 
-## Original files
+When there are new upstream releases:
 
-The ARM original files are kept in the repository `originals` branch, updated with each new release, and merged into the `xpack` branch (three-way merge).
-
-The current files were extracted from the `ARM.CMSIS-RTOS_Validation.1.0.0.pack` archive.
-
-To save space, the following folders/files were removed:
-
-* Documents
-* Examples
-
-## Changes
-
-The actual files used by this package are in the `xpack` repository branch.
-
-## Tests
-
-* none
-
---- 
+- upstream `master` is merged into the local `master`
+- the local `master` is merged into `xpack-develop`
+- the project is tested
+- `xpack-develop` is merged into `xpack`
