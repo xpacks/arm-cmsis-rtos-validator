@@ -15,3 +15,6 @@ xpacks/
 scripts/
 *.pdsc
 NOTES.md
+
+.vscode/
+README-*.md
