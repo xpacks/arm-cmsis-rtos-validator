@@ -36,7 +36,8 @@
   },
   "contributors": [
     {
-      "name": "Arm"
+      "name": "Arm",
+      "url": "https://arm-software.github.io/CMSIS_5/RTOS/html/rtosValidation.html"
     }
   ],
   "license": "LICENSE.pdf",
