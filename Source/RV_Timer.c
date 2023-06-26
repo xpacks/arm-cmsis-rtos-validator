@@ -253,7 +253,7 @@ void TC_TimerParam (void) {
 - Call all timer management functions from the ISR
 */
 void TC_TimerInterrupts (void) {
-  
+#if !defined(OS_SKIP_VALIDATOR_INTERRUPTS)
   TST_IRQHandler = Timer_IRQHandler;
   
   TimId_Running = osTimerCreate (osTimer (Tim_Running), osTimerPeriodic, NULL);
@@ -309,6 +309,7 @@ void TC_TimerInterrupts (void) {
     
     NVIC_DisableIRQ((IRQn_Type)0);
   }
+#endif // !defined(OS_SKIP_VALIDATOR_INTERRUPTS)
 }
 
 /**

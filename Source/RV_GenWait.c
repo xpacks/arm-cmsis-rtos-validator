@@ -92,7 +92,7 @@ void TC_GenWaitBasic (void) {
 - Call generic wait functions from the ISR
 */
 void TC_GenWaitInterrupts (void) {
-  
+#if !defined(OS_SKIP_VALIDATOR_INTERRUPTS)
   TST_IRQHandler = GenWait_IRQHandler;
   
   NVIC_EnableIRQ((IRQn_Type)0);
@@ -138,6 +138,7 @@ void TC_GenWaitInterrupts (void) {
  #endif
   
   NVIC_DisableIRQ((IRQn_Type)0);
+#endif // !defined(OS_SKIP_VALIDATOR_INTERRUPTS)
 }
 
 /**

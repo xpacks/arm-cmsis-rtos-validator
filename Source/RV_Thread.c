@@ -744,7 +744,7 @@ void TC_ThreadParam (void) {
 - Call all thread management functions from the ISR
 */
 void TC_ThreadInterrupts (void) {
-  
+#if !defined(OS_SKIP_VALIDATOR_INTERRUPTS)
   TST_IRQHandler = Thread_IRQHandler;
   
   ThId_Running = osThreadGetId ();
@@ -822,6 +822,7 @@ void TC_ThreadInterrupts (void) {
     
     NVIC_DisableIRQ((IRQn_Type)0);
   }
+#endif // !defined(OS_SKIP_VALIDATOR_INTERRUPTS)
 }
 
 /**

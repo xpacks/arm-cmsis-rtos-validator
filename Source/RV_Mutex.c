@@ -563,7 +563,7 @@ void TC_MutexParam (void) {
 - Call all mutex management functions from the ISR
 */
 void TC_MutexInterrupts (void) {
-  
+#if !defined(OS_SKIP_VALIDATOR_INTERRUPTS)
   TST_IRQHandler = Mutex_IRQHandler;
   
   NVIC_EnableIRQ((IRQn_Type)0);

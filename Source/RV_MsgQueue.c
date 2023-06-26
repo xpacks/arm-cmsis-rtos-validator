@@ -315,7 +315,7 @@ void TC_MsgQParam (void) {
 - Call all message queue management functions from the ISR
 */
 void TC_MsgQInterrupts (void) {
-  
+#if !defined(OS_SKIP_VALIDATOR_INTERRUPTS)
   TST_IRQHandler = MsgQueue_IRQHandler;
   
   NVIC_EnableIRQ((IRQn_Type)0);
@@ -400,6 +400,7 @@ void TC_MsgQInterrupts (void) {
   }
   
   NVIC_DisableIRQ((IRQn_Type)0);
+#endif // !defined(OS_SKIP_VALIDATOR_INTERRUPTS)
 }
 
 /*=======0=========1=========2=========3=========4=========5=========6=========7=========8=========9=========0=========1====*/
@@ -413,7 +414,7 @@ void TC_MsgFromThreadToISR (void) {
   osStatus stat;
   osEvent  evt;
   uint32_t cnt;
-  
+#if !defined(OS_SKIP_VALIDATOR_INTERRUPTS)
   TST_IRQHandler = MsgQueue_IRQHandler;
   
   ISR_ExNum = 5;                        /* Set case number in the ISR         */
@@ -465,6 +466,7 @@ void TC_MsgFromThreadToISR (void) {
     }
   }
   NVIC_DisableIRQ((IRQn_Type)0);
+#endif // !defined(OS_SKIP_VALIDATOR_INTERRUPTS)
 }
 
 /*=======0=========1=========2=========3=========4=========5=========6=========7=========8=========9=========0=========1====*/
@@ -479,7 +481,7 @@ void TC_MsgFromISRToThread (void) {
   osStatus stat;
   osEvent  evt;
   uint32_t cnt;
-  
+#if !defined(OS_SKIP_VALIDATOR_INTERRUPTS)
   TST_IRQHandler = MsgQueue_IRQHandler;
   
   ISR_ExNum = 6;                        /* Set case number in the ISR         */
@@ -533,6 +535,7 @@ void TC_MsgFromISRToThread (void) {
     }
   }
   NVIC_DisableIRQ((IRQn_Type)0);
+#endif // !defined(OS_SKIP_VALIDATOR_INTERRUPTS)
 }
 
 /**

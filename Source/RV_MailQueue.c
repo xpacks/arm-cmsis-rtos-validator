@@ -550,7 +550,7 @@ void TC_MailInterrupts (void) {
   MAIL_OBJ *mo;
   osEvent   evt;
   uint8_t buf[MAIL_BUF_SZ];
-  
+#if !defined(OS_SKIP_VALIDATOR_INTERRUPTS)
   TST_IRQHandler = MailQueue_IRQHandler;
   
   NVIC_EnableIRQ((IRQn_Type)0);
@@ -734,6 +734,7 @@ void TC_MailInterrupts (void) {
   // ---
 
   NVIC_DisableIRQ((IRQn_Type)0);
+#endif // !defined(OS_SKIP_VALIDATOR_INTERRUPTS)
 }
 
 /*=======0=========1=========2=========3=========4=========5=========6=========7=========8=========9=========0=========1====*/
@@ -749,7 +750,7 @@ void TC_MailFromThreadToISR (void) {
   osEvent   evt;
   uint8_t   cnt;
   uint32_t  i;
-  
+#if !defined(OS_SKIP_VALIDATOR_INTERRUPTS)
   TST_IRQHandler = MailQueue_IRQHandler;
   
   ISR_ExNum = 8;                      /* Set case number in the ISR         */ 
@@ -807,6 +808,7 @@ void TC_MailFromThreadToISR (void) {
     }
   }
   NVIC_DisableIRQ((IRQn_Type)0);
+#endif // !defined(OS_SKIP_VALIDATOR_INTERRUPTS)
 }
 
 /*=======0=========1=========2=========3=========4=========5=========6=========7=========8=========9=========0=========1====*/
@@ -825,6 +827,7 @@ void TC_MailFromISRToThread (void) {
   uint8_t   cnt;
   uint8_t buf[MAIL_BUF_SZ];
 
+#if !defined(OS_SKIP_VALIDATOR_INTERRUPTS)
   TST_IRQHandler = MailQueue_IRQHandler;
    
   ISR_ExNum = 9;                        /* Set case number in the ISR         */
@@ -887,6 +890,7 @@ void TC_MailFromISRToThread (void) {
     }
   }
   NVIC_DisableIRQ((IRQn_Type)0);
+#endif // !defined(OS_SKIP_VALIDATOR_INTERRUPTS)
 }
 
 /**

@@ -517,7 +517,7 @@ void TC_SemParam (void) {
 - Call all semaphore management functions from the ISR
 */
 void TC_SemInterrupts (void) {
-  
+#if !defined(OS_SKIP_VALIDATOR_INTERRUPTS)
   TST_IRQHandler = Semaphore_IRQHandler;
   
   NVIC_EnableIRQ((IRQn_Type)0);
@@ -609,6 +609,7 @@ void TC_SemInterrupts (void) {
     }
   }
   NVIC_DisableIRQ((IRQn_Type)0);
+#endif // !defined(OS_SKIP_VALIDATOR_INTERRUPTS)
 }
 
 /**

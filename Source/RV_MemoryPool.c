@@ -254,7 +254,7 @@ void TC_MemPoolParam (void) {
 - Call all memory pool management functions from the ISR
 */
 void TC_MemPoolInterrupts (void) {
-  
+#if !defined(OS_SKIP_VALIDATOR_INTERRUPTS)
   TST_IRQHandler = MemoryPool_IRQHandler;
   
   NVIC_EnableIRQ((IRQn_Type)0);
@@ -318,6 +318,7 @@ void TC_MemPoolInterrupts (void) {
     ASSERT_TRUE (MemPool_StIsr == osOK);
   }
   NVIC_DisableIRQ((IRQn_Type)0);
+#endif // !defined(OS_SKIP_VALIDATOR_INTERRUPTS)
 }
 
 /**

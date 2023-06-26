@@ -544,7 +544,7 @@ void TC_SignalParam (void) {
 */
 void TC_SignalInterrupts (void) {
   osEvent  event;
-  
+#if !defined(OS_SKIP_VALIDATOR_INTERRUPTS)
   TST_IRQHandler = Signal_IRQHandler;
   
   Var_ThreadId = osThreadGetId();
@@ -620,6 +620,7 @@ void TC_SignalInterrupts (void) {
     NVIC_DisableIRQ((IRQn_Type)0);
 
   }
+#endif // !defined(OS_SKIP_VALIDATOR_INTERRUPTS)
 }
 
 /**
