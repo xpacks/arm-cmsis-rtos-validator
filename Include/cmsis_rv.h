@@ -1,5 +1,5 @@
 /*-----------------------------------------------------------------------------
- *      Name:         cmsis_rv.h 
+ *      Name:         cmsis_rv.h
  *      Purpose:      cmsis_rv header
  *----------------------------------------------------------------------------
  *      Copyright(c) KEIL - An ARM Company
@@ -57,21 +57,21 @@ extern void TC_TimerPeriodic (void);
 extern void TC_TimerParam (void);
 extern void TC_TimerInterrupts (void);
 
-extern void TC_SignalMainThread (void);  
-extern void TC_SignalChildThread (void); 
+extern void TC_SignalMainThread (void);
+extern void TC_SignalChildThread (void);
 extern void TC_SignalChildToParent (void);
-extern void TC_SignalChildToChild (void); 
-extern void TC_SignalWaitTimeout (void); 
-extern void TC_SignalParam (void);       
-extern void TC_SignalInterrupts (void);  
+extern void TC_SignalChildToChild (void);
+extern void TC_SignalWaitTimeout (void);
+extern void TC_SignalParam (void);
+extern void TC_SignalInterrupts (void);
 
 extern void TC_MutexBasic (void);
-extern void TC_MutexTimeout (void); 
-extern void TC_MutexNestedAcquire (void); 
-extern void TC_MutexPriorityInversion (void); 
-extern void TC_MutexOwnership (void); 
-extern void TC_MutexParam (void); 
-extern void TC_MutexInterrupts (void); 
+extern void TC_MutexTimeout (void);
+extern void TC_MutexNestedAcquire (void);
+extern void TC_MutexPriorityInversion (void);
+extern void TC_MutexOwnership (void);
+extern void TC_MutexParam (void);
+extern void TC_MutexInterrupts (void);
 
 extern void TC_SemaphoreCreateAndDelete (void);
 extern void TC_SemaphoreObtainCounting (void);
