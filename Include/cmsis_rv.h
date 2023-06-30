@@ -10,6 +10,10 @@
 #include <stdint.h>
 
 // [ILG]
+#if defined(OS_USE_OS_APP_CONFIG_H)
+#include <cmsis-plus/os-app-config.h>
+#endif
+
 // Include the vendor specific CMSIS file.
 #if defined(__ARM_EABI__)
 #include "cmsis_device.h"
