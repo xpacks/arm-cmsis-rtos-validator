@@ -41,12 +41,11 @@ os_main (int argc __attribute__((unused)), char* argv[] __attribute__((unused)))
 
 #if defined(__ARM_EABI__)
 
-#if defined OS_HAS_WWDG_IRQ_HANDLER
 void
-WWDG_IRQHandler (void);
+ARM_CMSIS_VALIDATOR_IRQHandler (void);
 
 void
-WWDG_IRQHandler (void)
+ARM_CMSIS_VALIDATOR_IRQHandler (void)
   {
     if (TST_IRQHandler != NULL)
       {
@@ -57,23 +56,6 @@ WWDG_IRQHandler (void)
     for (;;)
     ;
   }
-#elif defined OS_HAS_WDT_IRQ_HANDLER
-void
-WDT_IRQHandler (void);
-
-void
-WDT_IRQHandler (void)
-  {
-    if (TST_IRQHandler != NULL)
-      {
-        TST_IRQHandler ();
-        return;
-      }
-    __asm__ volatile ("bkpt 0");
-    for (;;)
-    ;
-  }
-#endif
 
 #elif defined(__APPLE__) || defined(__linux__)
 
