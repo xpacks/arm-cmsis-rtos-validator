@@ -1,6 +1,6 @@
 {
   "name": "@xpacks/arm-cmsis-rtos-validator",
-  "version": "1.0.0-1.pre.4",
+  "version": "1.0.0-1.pre.5",
   "description": "A source code library with the Arm CMSIS RTOS validator",
   "main": "",
   "scripts": {
