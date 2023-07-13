@@ -1,4 +1,3 @@
-[![license](https://img.shields.io/github/license/xpacks/arm-cmsis-rtos-validator)](https://github.com/xpacks/arm-cmsis-rtos-validator/blob/xpack/LICENSE.pdf)
 [![CI on Push](https://github.com/xpacks/arm-cmsis-rtos-validator/actions/workflows/CI.yml/badge.svg)](https://github.com/xpacks/arm-cmsis-rtos-validator/actions/workflows/CI.yml)
 [![GitHub issues](https://img.shields.io/github/issues/xpacks/arm-cmsis-rtos-validator.svg)](https://github.com/xpacks/arm-cmsis-rtos-validator/issues/)
 [![GitHub pulls](https://img.shields.io/github/issues-pr/xpacks/arm-cmsis-rtos-validator.svg)](https://github.com/xpacks/arm-cmsis-rtos-validator/pulls)

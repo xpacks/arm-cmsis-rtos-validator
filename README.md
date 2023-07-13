@@ -1,7 +1,6 @@
 [![GitHub package.json version](https://img.shields.io/github/package-json/v/xpacks/arm-cmsis-rtos-validator)](https://github.com/xpacks/arm-cmsis-rtos-validator/blob/xpack/package.json)
 [![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/xpacks/arm-cmsis-rtos-validator)](https://github.com/xpacks/arm-cmsis-rtos-validator/tags/)
 [![npm (scoped)](https://img.shields.io/npm/v/@xpacks/arm-cmsis-rtos-validator.svg?color=blue)](https://www.npmjs.com/package/@xpacks/arm-cmsis-rtos-validator/)
-[![license](https://img.shields.io/github/license/xpacks/arm-cmsis-rtos-validator)](https://github.com/xpacks/arm-cmsis-rtos-validator/blob/xpack/LICENSE)
 
 # A source code library with the Arm CMSIS RTOS validator
 
