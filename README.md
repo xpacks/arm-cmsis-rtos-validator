@@ -1,7 +1,7 @@
 [![GitHub package.json version](https://img.shields.io/github/package-json/v/xpacks/arm-cmsis-rtos-validator)](https://github.com/xpacks/arm-cmsis-rtos-validator/blob/xpack/package.json)
 [![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/xpacks/arm-cmsis-rtos-validator)](https://github.com/xpacks/arm-cmsis-rtos-validator/tags/)
 
-# A source code library with the Arm CMSIS RTOS validator
+# An xpm/npm package with the Arm CMSIS RTOS validator
 
 This project provides a convenient way to integrate the
 [ARM::CMSIS-RTOS_Validation Pack](https://arm-software.github.io/CMSIS_5/RTOS/html/rtosValidation.html)
@@ -9,6 +9,14 @@ into the xpm/npm ecosystem, by allowing to install it as a package dependency.
 
 The open-source project is hosted on GitHub as
 [xpacks/arm-cmsis-rtos-validator](https://github.com/xpacks/arm-cmsis-rtos-validator).
+
+## Maintainer info
+
+This page is addressed to developers who plan to include this source
+library into their own projects.
+
+For maintainer info, please see the
+[README-MAINTAINER-XPACK](README-MAINTAINER-XPACK.md) file.
 
 ## Install
 
@@ -24,9 +32,7 @@ to **add it as a dependency** to the project via **xpm**.
 
 Along with the source files, this project also includes a
 `package.json` file with the metadata that allows it to be identified as an
-**xpm/npm** package so that it can be directly installed from GitHub or
-from the [npmjs.com](https://www.npmjs.com) registry as
-[`@micro-os-plus/utils-lists`](https://www.npmjs.com/package/@micro-os-plus/utils-lists).
+**xpm/npm** package so that it can be directly installed from GitHub.
 
 #### Prerequisites
 
@@ -56,7 +62,7 @@ This project can be installed as a package from GitHub with:
 cd my-project
 xpm init # Unless a package.json is already present
 
-xpm install github:xpacks/arm-cmsis-rtos-validator
+xpm install github:xpacks/arm-cmsis-rtos-validator#1.0.0-1 --save-dev --copy
 
 ls -l xpacks/@xpacks/arm-cmsis-rtos-validator
 ```
@@ -107,17 +113,18 @@ When there are new upstream releases:
 - the project is tested
 - `xpack-develop` is merged into `xpack`
 
-## Change log - incompatible changes
+## Developer info
 
-According to [semver](https://semver.org) rules:
+TBD
 
-> Major version X (X.y.z | X > 0) MUST be incremented if any
-backwards incompatible changes are introduced to the public API.
+### Status
 
-The incompatible changes, in reverse chronological order,
-are:
+The **xpacks/arm-cmsis-rtos-validator** source library is fully functional,
+but starting with mid 2023 it was marked as end-of-life and
+is not recommended for new designs.
 
-- v1.x: initial version
+A new package will be available in the `@xpack-3rd-party` scope,
+as part of µOS++ IVe.
 
 ## License
 

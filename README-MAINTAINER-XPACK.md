@@ -1,4 +1,3 @@
-[![CI on Push](https://github.com/xpacks/arm-cmsis-rtos-validator/actions/workflows/CI.yml/badge.svg)](https://github.com/xpacks/arm-cmsis-rtos-validator/actions/workflows/CI.yml)
 [![GitHub issues](https://img.shields.io/github/issues/xpacks/arm-cmsis-rtos-validator.svg)](https://github.com/xpacks/arm-cmsis-rtos-validator/issues/)
 [![GitHub pulls](https://img.shields.io/github/issues-pr/xpacks/arm-cmsis-rtos-validator.svg)](https://github.com/xpacks/arm-cmsis-rtos-validator/pulls)
 
@@ -86,7 +85,7 @@ related to the new version.
 
 - commit and push
 
-### Publish on the npmjs.com server
+### Commit the new version
 
 - select the `xpack-develop` branch
 - commit all changes
@@ -98,15 +97,6 @@ related to the new version.
 - push the `xpack-develop` branch to GitHub
 - the `postversion` npm script should also update tags via `git push origin --tags`
 
-### Publish
-
-- `npm publish --tag next` (use `npm publish --access public` when
-  publishing for the first time)
-
-The version is visible at:
-
-- <https://www.npmjs.com/package/@xpacks/arm-cmsis-rtos-validator?activeTab=versions>
-
 ### Update the repo
 
 When the package is considered stable:
@@ -115,11 +105,3 @@ When the package is considered stable:
 - merge `xpack-develop` into `xpack`
 - push to GitHub
 - select `xpack-develop`
-
-### Tag the npm package as `latest`
-
-When the release is considered stable, promote it as `latest`:
-
-- `npm dist-tag ls @xpacks/arm-cmsis-rtos-validator`
-- `npm dist-tag add @xpacks/arm-cmsis-rtos-validator@1.0.0-1 latest`
-- `npm dist-tag ls @xpacks/arm-cmsis-rtos-validator`
