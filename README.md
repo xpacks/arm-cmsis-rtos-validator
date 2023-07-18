@@ -51,8 +51,7 @@ npm install --global xpm@latest
 For details please follow the instructions in the
 [xPack install](https://xpack.github.io/install/) page.
 
-@warning
-Be sure **xpm** is not installed with administrative rights.
+Warning: Be sure **xpm** is not installed with administrative rights.
 
 #### xpm
 
@@ -99,6 +98,8 @@ xPack specific branches:
 
 - `xpack`, with the latest stable version (default)
 - `xpack-develop`, with the current development version
+- `originals`, with the original Arm content, reconstructed
+  from the distributed archives
 
 All development is done in the `xpack-develop` branch, and contributions via
 Pull Requests should be directed to this branch.
@@ -115,7 +116,10 @@ When there are new upstream releases:
 
 ## Developer info
 
-TBD
+### Overview
+
+The current files were extracted from the
+`ARM.CMSIS-RTOS_Validation.1.0.0.pack` archive.
 
 ### Status
 
@@ -126,9 +130,88 @@ is not recommended for new designs.
 A new package will be available in the `@xpack-3rd-party` scope,
 as part of µOS++ IVe.
 
+### Build & integration info
+
+To ease the integration of this package into user projects, there
+are already made CMake configuration files (see below).
+
+For other build systems, consider the following details:
+
+#### Include folders
+
+The following folders should be passed to the compiler during the build:
+
+- `Include`
+- `cmsis-plus/include`
+
+#### Source files
+
+- `cmsis-plus/src/main.c`
+- `Source/RV_Framework.c`
+- `Source/cmsis_rv.c`
+- `Source/RV_Signal.c`
+- `Source/RV_Report.c`
+- `Source/RV_Thread.c`
+- `Source/RV_MailQueue.c`
+- `Source/RV_Timer.c`
+- `Source/RV_GenWait.c`
+- `Source/RV_WaitFunc.c`
+- `Source/RV_MemoryPool.c`
+- `Source/RV_MsgQueue.c`
+- `Source/RV_Mutex.c`
+- `Source/RV_Semaphore.c`
+
+#### Preprocessor definitions
+
+- none
+
+#### Compiler options
+
+- none
+
+#### Dependencies
+
+- none
+
+#### CMake
+
+To integrate the **arm-cmsis** source library
+into a CMake application,
+add this folder to the build:
+
+```cmake
+add_subdirectory("xpacks/@xpacks/arm-cmsis-os-validator")`
+```
+
+The result is an interface library that can be added as an application
+dependency with:
+
+```cmake
+target_link_libraries(your-target PRIVATE
+
+  xpacks::arm-cmsis-os-validator
+)
+```
+
+### Examples
+
+- none
+
+### Known problems
+
+- none
+
+### Limitations
+
+- none
+
+### Tests
+
+- none
+
 ## License
 
-The original content is released under the
+The xPack specific content is released under the
 [MIT License](https://opensource.org/licenses/MIT/),
 with all rights reserved to
 [Liviu Ionescu](https://github.com/ilg-ul).
