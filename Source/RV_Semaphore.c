@@ -15,6 +15,7 @@
 #pragma clang diagnostic ignored "-Wcast-qual"
 #pragma clang diagnostic ignored "-Wextra-semi-stmt"
 #pragma clang diagnostic ignored "-Wdeclaration-after-statement"
+#pragma clang diagnostic ignored "-Wunsafe-buffer-usage"
 #elif defined(__GNUC__)
 #pragma GCC diagnostic ignored "-Waggregate-return"
 #pragma GCC diagnostic ignored "-Wcast-qual"

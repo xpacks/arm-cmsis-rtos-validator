@@ -16,6 +16,7 @@
 #if defined(__clang__)
 #pragma clang diagnostic ignored "-Wreserved-identifier"
 #pragma clang diagnostic ignored "-Wreserved-id-macro"
+#pragma clang diagnostic ignored "-Wunsafe-buffer-usage"
 #elif defined(__GNUC__)
 #endif
 

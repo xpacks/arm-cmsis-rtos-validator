@@ -16,6 +16,7 @@
 #pragma clang diagnostic ignored "-Wunused-parameter"
 #pragma clang diagnostic ignored "-Wunused-macros"
 #pragma clang diagnostic ignored "-Wextra-semi-stmt"
+#pragma clang diagnostic ignored "-Wunsafe-buffer-usage"
 #elif defined(__GNUC__)
 #pragma GCC diagnostic ignored "-Waggregate-return"
 #pragma GCC diagnostic ignored "-Wmissing-prototypes"
