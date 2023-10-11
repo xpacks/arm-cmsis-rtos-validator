@@ -6,9 +6,37 @@ Please check
 [GitHub](https://github.com/xpacks/arm-cmsis-rtos-validator/issues)
 and close existing issues and pull requests.
 
+## 2023-10-10
+
+* v1.0.0-2
+* 3123bf4 silence warnings
+
+## 2023-07-22
+
+* 0f436c2 README updates
+
+## 2023-07-21
+
+* dc81e7a README updates
+* 26ed859 README updates
+
+## 2023-07-18
+
+* 0cc0b0c README update
+
+## 2023-07-14
+
+* 1ce3a78 README update
+* 8c28517 README update
+* 7ff9195 README updates
+* 7296bf7 package.json: minXpm 0.16.2
+
 ## 2023-07-13
 
-* v1.0.0-1
+* 083f174 README update
+* 8a3378c READMEs updates
+* 7b42029 1.0.0-1
+* 0d0312b prepare v1.0.0-1
 
 ## 2023-07-12
 
