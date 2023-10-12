@@ -45,9 +45,11 @@ typedef unsigned int    BOOL;
 #endif
 
 #define ARRAY_SIZE(arr) (sizeof(arr)/sizeof((arr)[0]))
-  
-#define __FILENAME__ (strrchr(__FILE__, '\\') ? strrchr(__FILE__, '\\') + 1 : __FILE__)
-  
+
+// [ILG] - use POSIX paths
+// #define __FILENAME__ (strrchr(__FILE__, '\\') ? strrchr(__FILE__, '\\') + 1 : __FILE__)
+#define __FILENAME__ (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
+
 /* Assertions and test results */
 #define SET_RESULT(res, desc) __set_result(__FILENAME__, __LINE__, res, desc);
 #define ASSERT_TRUE(cond) __assert_true (__FILENAME__, __LINE__, cond);
