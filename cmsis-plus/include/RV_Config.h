@@ -43,4 +43,16 @@ NVIC_SetPendingIRQ(IRQn_Type);
 #define HW_PRESENT  (1)
 #endif
 
+// [ILG]
+void MsgPrint (const char *msg, ...);
+void MsgFlush (void);
+
+#if defined(TRACE)
+#define PRINT(x) trace_printf x
+#define FLUSH()
+#else
+#define PRINT(x) MsgPrint x
+#define FLUSH()  MsgFlush()
+#endif
+
 #endif /* RV_CONFIG_H_ */

@@ -58,13 +58,13 @@ uint32_t    current_result;       /* Current test case result                 */
 #define CAS (&current_assertions)             /* Current assertions           */
 
 // [ILG]
-#if defined(TRACE)
-#define PRINT(x) trace_printf x
-#define FLUSH()
-#else
-#define PRINT(x) MsgPrint x
-#define FLUSH()  MsgFlush()
-#endif
+// #if defined(TRACE)
+// #define PRINT(x) trace_printf x
+// #define FLUSH()
+// #else
+// #define PRINT(x) MsgPrint x
+// #define FLUSH()  MsgFlush()
+// #endif
 
 static uint8_t Passed[] = "PASSED";
 static uint8_t Warning[] = "WARNING";
@@ -84,8 +84,9 @@ static BOOL     StatCount (TC_RES res);
 /*-----------------------------------------------------------------------------
  * Printer function prototypes
  *----------------------------------------------------------------------------*/
-static void MsgPrint (const char *msg, ...);
-static void MsgFlush (void);
+// [ILG] - moved to RV_Config.h
+// static void MsgPrint (const char *msg, ...);
+// static void MsgFlush (void);
 
 
 /*-----------------------------------------------------------------------------
