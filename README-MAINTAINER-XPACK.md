@@ -59,7 +59,7 @@ Determine the upstream version (like `1.0.0`)
 
 Update the`package.json` file; add an extra digit in the
 pre-release field, and initially also add `.pre`,
-for example `1.0.0-2.pre.1`.
+for example `1.0.0-3.pre.1`.
 
 ### Fix possible open issues
 
@@ -67,7 +67,7 @@ Check GitHub issues and pull requests:
 
 - <https://github.com/xpacks/arm-cmsis-rtos-validator/issues/>
 
-and fix them; assign them to a milestone (like `1.0.0-2`).
+and fix them; assign them to a milestone (like `1.0.0-3`).
 
 ### Update `README-MAINTAINER-XPACK.md`
 
@@ -78,8 +78,8 @@ related to the new version.
 
 - open the `CHANGELOG-XPACK.md` file
 - check if all previous fixed issues are in
-- add a new entry like _* v1.0.0-2_
-- commit with a message like _prepare v1.0.0-2_
+- add a new entry like _* v1.0.0-3_
+- commit with a message like _prepare v1.0.0-3_
 
 ### Push changes
 
@@ -93,7 +93,7 @@ related to the new version.
   only `package.json`, `README.md`, `LICENSE`, `CHANGELOG-XPACK.md`,
   the `doxygen-awesome-*.js` and `doxygen-custom/*` files;
   possibly adjust `.npmignore`
-- `npm version 1.0.0-2`
+- `npm version 1.0.0-3`
 - push the `xpack-develop` branch to GitHub
 - the `postversion` npm script should also update tags via `git push origin --tags`
 
