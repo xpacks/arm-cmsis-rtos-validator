@@ -6,9 +6,16 @@ Please check
 [GitHub](https://github.com/xpacks/arm-cmsis-rtos-validator/issues)
 and close existing issues and pull requests.
 
+## 2025-08-19
+
+* v1.0.0-4
+* 3a12c74 package.json add action xpm link
+* 24f4c10 silence clang -Wswitch-default
+
 ## 2023-10-12
 
-* v1.0.0-3
+* 8e8766c 1.0.0-3
+* 90d810c prepare v1.0.0-3
 * 3294d19 RV_Signal.c: do not break on delays (posix)
 * e25e876 move PRINT() & FLUSH() to header
 * e704325 RV_Typedefs.h: __FILENAME__ POSIX path
