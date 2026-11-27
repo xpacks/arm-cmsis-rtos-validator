@@ -8,7 +8,7 @@ IFS=$'\n\t'
 
 RELEASE_VERSION="1.0.0"
 
-GITHUB_PROJECT="xpacks/arm-cmsis-rtos-validator"
+GITHUB_PROJECT="xpack-3rd-party/arm-cmsis-rtos-validator-xpack"
 NAME_PREFIX="ARM.CMSIS-RTOS_Validation"
 ARCHIVE_NAME="${NAME_PREFIX}.${RELEASE_VERSION}.pack"
 ARCHIVE_URL="http://www.keil.com/pack/${ARCHIVE_NAME}"

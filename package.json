@@ -1,23 +1,21 @@
 {
-  "name": "@xpacks/arm-cmsis-rtos-validator",
-  "version": "1.0.0-4",
+  "name": "@xpack-3rd-party/arm-cmsis-rtos-validator",
+  "version": "1.0.0-5.pre",
   "description": "A source code library with the Arm CMSIS RTOS validator",
   "main": "",
   "scripts": {
     "npm-install": "npm install",
-    "pack": "npm pack",
-    "version-patch": "npm version patch",
-    "version-minor": "npm version minor",
+    "npm-pack": "npm pack",
     "postversion": "git push origin --all && git push origin --tags",
     "git-log": "git log --pretty='%cd * %h %s' --date=short"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/xpacks/arm-cmsis-rtos-validator-xpack.git"
+    "url": "https://github.com/xpack-3rd-party/arm-cmsis-rtos-validator-xpack.git"
   },
-  "homepage": "https://github.com/xpacks/arm-cmsis-rtos-validator-xpack",
+  "homepage": "https://github.com/xpack-3rd-party/arm-cmsis-rtos-validator-xpack",
   "bugs": {
-    "url": "https://github.com/xpacks/arm-cmsis-rtos-validator-xpack/issues"
+    "url": "https://github.com/xpack-3rd-party/arm-cmsis-rtos-validator-xpack/issues"
   },
   "keywords": [
     "xpack",
@@ -56,7 +54,7 @@
     "devDependencies": {},
     "properties": {},
     "actions": {
-      "link": "xpm link"
+      "xpm-link": "xpm link"
     },
     "buildConfigurations": {}
   }

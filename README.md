@@ -1,5 +1,5 @@
-[![GitHub package.json version](https://img.shields.io/github/package-json/v/xpacks/arm-cmsis-rtos-validator)](https://github.com/xpacks/arm-cmsis-rtos-validator/blob/xpack/package.json)
-[![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/xpacks/arm-cmsis-rtos-validator)](https://github.com/xpacks/arm-cmsis-rtos-validator/tags/)
+[![GitHub package.json version](https://img.shields.io/github/package-json/v/xpack-3rd-party/arm-cmsis-rtos-validator-xpack)](https://github.com/xpack-3rd-party/arm-cmsis-rtos-validator/blob/xpack/package.json)
+[![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/xpack-3rd-party/arm-cmsis-rtos-validator-xpack)](https://github.com/xpack-3rd-party/arm-cmsis-rtos-validator/tags/)
 
 # An xpm/npm package with the Arm CMSIS RTOS validator
 
@@ -8,7 +8,7 @@ This project provides a convenient way to integrate the
 into the xpm/npm ecosystem, by allowing to install it as a package dependency.
 
 The open-source project is hosted on GitHub as
-[xpacks/arm-cmsis-rtos-validator](https://github.com/xpacks/arm-cmsis-rtos-validator).
+[xpack-3rd-party/arm-cmsis-rtos-validator-xpack](https://github.com/xpack-3rd-party/arm-cmsis-rtos-validator-xpack).
 
 ## Maintainer info
 
@@ -61,9 +61,9 @@ This source code library can be installed as a sub-folder below `xpacks` with:
 cd my-project
 xpm init # Add a package.json if not already present
 
-xpm install github:xpacks/arm-cmsis-rtos-validator#1.0.0-4 --save-dev --copy
+xpm install github:xpack-3rd-party/arm-cmsis-rtos-validator-xpack#1.0.0-5 --save-dev --copy
 
-ls -l xpacks/@xpacks/arm-cmsis-rtos-validator
+ls -l xpacks/@xpack-3rd-party/arm-cmsis-rtos-validator
 ```
 
 Note: On Windows use `dir` and back-slashes.
@@ -91,8 +91,8 @@ cd my-project
 git init # Unless already a Git project
 mkdir -p xpacks
 
-git submodule add https://github.com/xpacks/arm-cmsis-rtos-validator.git \
-  xpacks/@xpacks/arm-cmsis-rtos-validator
+git submodule add https://github.com/xpack-3rd-party/arm-cmsis-rtos-validator-xpack.git \
+  xpacks/@xpack-3rd-party/arm-cmsis-rtos-validator
 ```
 
 ## Branches
@@ -127,7 +127,7 @@ The current files were extracted from the
 
 ### Status
 
-The **xpacks/arm-cmsis-rtos-validator** source library is fully functional,
+The **xpack-3rd-party/arm-cmsis-rtos-validator-xpack** source library is fully functional,
 but starting with mid 2023 it was marked as end-of-life and
 is not recommended for new designs.
 

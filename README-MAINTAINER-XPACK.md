@@ -1,5 +1,5 @@
-[![GitHub issues](https://img.shields.io/github/issues/xpacks/arm-cmsis-rtos-validator.svg)](https://github.com/xpacks/arm-cmsis-rtos-validator/issues/)
-[![GitHub pulls](https://img.shields.io/github/issues-pr/xpacks/arm-cmsis-rtos-validator.svg)](https://github.com/xpacks/arm-cmsis-rtos-validator/pulls)
+[![GitHub issues](https://img.shields.io/github/issues/xpack-3rd-party/arm-cmsis-rtos-validator.svg)](https://github.com/xpack-3rd-party/arm-cmsis-rtos-validator-xpack/issues/)
+[![GitHub pulls](https://img.shields.io/github/issues-pr/xpack-3rd-party/arm-cmsis-rtos-validator.svg)](https://github.com/xpack-3rd-party/arm-cmsis-rtos-validator-xpack/pulls)
 
 # Maintainer info
 
@@ -7,28 +7,28 @@
 
 The project is hosted on GitHub:
 
-- <https://github.com/xpacks/arm-cmsis-rtos-validator.git>
+- <https://github.com/xpack-3rd-party/arm-cmsis-rtos-validator-xpack.git>
 
 To clone the stable branch (`xpack`), run the following commands in a
 terminal (on Windows use the _Git Bash_ console):
 
 ```sh
-rm -rf ~/Work/xpack-3rd-party/arm-cmsis-rtos-validator.git && \
+rm -rf ~/Work/xpack-3rd-party/arm-cmsis-rtos-validator-xpack.git && \
 mkdir -p ~/Work/xpack-3rd-party && \
 git clone \
-  https://github.com/xpacks/arm-cmsis-rtos-validator.git \
-  ~/Work/xpack-3rd-party/arm-cmsis-rtos-validator.git
+  https://github.com/xpack-3rd-party/arm-cmsis-rtos-validator-xpack.git \
+  ~/Work/xpack-3rd-party/arm-cmsis-rtos-validator-xpack.git
 ```
 
 For development purposes, clone the `xpack-development` branch:
 
 ```sh
-rm -rf ~/Work/xpack-3rd-party/arm-cmsis-rtos-validator.git && \
+rm -rf ~/Work/xpack-3rd-party/arm-cmsis-rtos-validator-xpack.git && \
 mkdir -p ~/Work/xpack-3rd-party && \
 git clone \
   --branch xpack-development \
-  https://github.com/xpacks/arm-cmsis-rtos-validator.git \
-  ~/Work/xpack-3rd-party/arm-cmsis-rtos-validator.git
+  https://github.com/xpack-3rd-party/arm-cmsis-rtos-validator-xpack.git \
+  ~/Work/xpack-3rd-party/arm-cmsis-rtos-validator-xpack.git
 ```
 
 ## Prerequisites
@@ -44,7 +44,7 @@ There are no fixed releases, the project aims to follow the upstream releases.
 
 ### Check Git
 
-In the `xpacks/arm-cmsis-rtos-validator` Git repo:
+In the `xpack-3rd-party/arm-cmsis-rtos-validator-xpack` Git repo:
 
 - switch to the `xpack-development` branch
 - if needed, merge the `xpack` branch
@@ -59,15 +59,15 @@ Determine the upstream version (like `1.0.0`)
 
 Update the`package.json` file; add an extra digit in the
 pre-release field, and initially also add `.pre`,
-for example `1.0.0-4.pre.1`.
+for example `1.0.0-5.pre`.
 
 ### Fix possible open issues
 
 Check GitHub issues and pull requests:
 
-- <https://github.com/xpacks/arm-cmsis-rtos-validator/issues/>
+- <https://github.com/xpack-3rd-party/arm-cmsis-rtos-validator-xpack/issues/>
 
-and fix them; assign them to a milestone (like `1.0.0-4`).
+and fix them; assign them to a milestone (like `1.0.0-5`).
 
 ### Update `README-MAINTAINER-XPACK.md`
 
@@ -78,8 +78,8 @@ related to the new version.
 
 - open the `CHANGELOG-XPACK.md` file
 - check if all previous fixed issues are in
-- add a new entry like _* v1.0.0-4_
-- commit with a message like _prepare v1.0.0-4_
+- add a new entry like _\* v1.0.0-5_
+- commit with a message like _prepare v1.0.0-5_
 
 ### Push changes
 
@@ -93,7 +93,7 @@ related to the new version.
   only `package.json`, `README.md`, `LICENSE`, `CHANGELOG-XPACK.md`,
   the `doxygen-awesome-*.js` and `doxygen-custom/*` files;
   possibly adjust `.npmignore`
-- `npm version 1.0.0-4`
+- `npm version 1.0.0-5`
 - push the `xpack-development` branch to GitHub
 - the `postversion` npm script should also update tags via `git push origin --tags`
 
