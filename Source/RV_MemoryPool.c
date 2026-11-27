@@ -15,6 +15,9 @@
 #pragma clang diagnostic ignored "-Wextra-semi-stmt"
 #pragma clang diagnostic ignored "-Wunsafe-buffer-usage"
 #pragma clang diagnostic ignored "-Wswitch-default"
+#if (__clang_major__ >= 21)
+#pragma clang diagnostic ignored "-Wimplicit-void-ptr-cast"
+#endif // (__clang_major__ >= 21)
 #elif defined(__GNUC__)
 #pragma GCC diagnostic ignored "-Warith-conversion"
 #pragma GCC diagnostic ignored "-Wswitch-default"
@@ -196,6 +199,7 @@ void TC_MemPoolZeroInit (void) {
     /* Allocate all memory blocks and fill them with pattern */
     for (i = 0; i < MEMBL_CNT; i++) {
       /* Get address of the allocated memory block */
+      // #pragma clang diagnostic ignored "-Wimplicit-void-ptr-cast"
       addr[i] = osPoolAlloc (MemPool_Id);
       ASSERT_TRUE (addr[i] != NULL);
 
@@ -214,6 +218,7 @@ void TC_MemPoolZeroInit (void) {
     /* Check if memory initialized to zero */
     for (i = 0; i < MEMBL_CNT; i++) {
       /* Allocate zero initialized block */
+      // #pragma clang diagnostic ignored "-Wimplicit-void-ptr-cast"
       addr[i] = osPoolCAlloc (MemPool_Id);
       ASSERT_TRUE (addr != NULL);
       

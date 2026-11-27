@@ -17,6 +17,9 @@
 #pragma clang diagnostic ignored "-Wunused-macros"
 #pragma clang diagnostic ignored "-Wextra-semi-stmt"
 #pragma clang diagnostic ignored "-Wunsafe-buffer-usage"
+#if (__clang_major__ >= 21)
+#pragma clang diagnostic ignored "-Wimplicit-void-ptr-cast"
+#endif // (__clang_major__ >= 21)
 #elif defined(__GNUC__)
 #pragma GCC diagnostic ignored "-Waggregate-return"
 #pragma GCC diagnostic ignored "-Wmissing-prototypes"
@@ -612,6 +615,7 @@ void TC_MeasureOsMailWaitTicks (void) {
     ASSERT_TRUE (long_wait > Lim_OsMailWait[0] && long_wait < Lim_OsMailWait[1]);
     ASSERT_TRUE (wait > Lim_OsMailWait[0] && wait < Lim_OsMailWait[1]);
 
+    // #pragma clang diagnostic ignored "-Wimplicit-void-ptr-cast"
     G_MailPtr = osMailAlloc (G_WaitFunc_MailQId, 0);
     ASSERT_TRUE (G_MailPtr != NULL);
     
